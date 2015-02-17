@@ -29,6 +29,10 @@ public class MouseInteraction extends Observable implements MouseMotionListener,
     @Override
     public void mousePressed(MouseEvent e) {
 
+        for (Figure f : figureList)
+            if (f.encloses(e.getX(), e.getY())) {
+                selectedFigure = f;
+            }
     }
 
     @Override
@@ -50,6 +54,7 @@ public class MouseInteraction extends Observable implements MouseMotionListener,
     public void mouseDragged(MouseEvent e) {
         if (selectedFigure != null) {
             selectedFigure.moveTo(e.getX(), e.getY());
+            setChanged();
             notifyObservers();
         }
     }

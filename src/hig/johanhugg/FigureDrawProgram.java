@@ -14,8 +14,14 @@ public class FigureDrawProgram extends JFrame {
         figureList.add(new Circle(300, 300, 5));
         figureList.add(new Circle(400, 400, 2));
         FigureViewer figureViewer = new FigureViewer(figureList);
-        this.setContentPane(figureViewer);
+
         setBounds(0, 0, 800, 600);
+        MouseInteraction mi = new MouseInteraction(figureList);
+
+        figureViewer.addMouseListener(mi);
+        figureViewer.addMouseMotionListener(mi);
+
+        this.setContentPane(figureViewer);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
     }

@@ -13,11 +13,13 @@ public class FigureList extends Observable implements Iterable<Figure>, Observer
 
     public void add(Figure figure) {
         figures.add(figure);
+        setChanged();
         notifyObservers();
     }
 
     public void remove(Figure figure) {
         figures.remove(figure);
+        setChanged();
         notifyObservers();
     }
 
@@ -27,6 +29,7 @@ public class FigureList extends Observable implements Iterable<Figure>, Observer
 
     @Override
     public void update(Observable o, Object arg) {
+        setChanged();
         this.notifyObservers();
     }
 }

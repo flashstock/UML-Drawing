@@ -30,4 +30,6 @@ public abstract class Figure implements Drawable {
     public abstract void move(int dx, int dy);
     public abstract boolean encloses(int x, int y);
     public abstract void moveTo(int x, int y);
+    public abstract int getX();
+    public abstract int getY();
 }

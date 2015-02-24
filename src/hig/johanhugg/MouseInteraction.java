@@ -11,6 +11,7 @@ import java.util.Observable;
 public class MouseInteraction extends Observable implements MouseMotionListener, MouseListener {
     private Figure selectedFigure;
     private FigureList figureList;
+    private int dx, dy;
 
     public MouseInteraction(FigureList list) {
         this.figureList = list;
@@ -32,6 +33,8 @@ public class MouseInteraction extends Observable implements MouseMotionListener,
         for (Figure f : figureList)
             if (f.encloses(e.getX(), e.getY())) {
                 selectedFigure = f;
+                dx = e.getX() - selectedFigure.getX();
+                dy = e.getY() - selectedFigure.getY();
             }
     }
 
@@ -50,10 +53,12 @@ public class MouseInteraction extends Observable implements MouseMotionListener,
 
     }
 
+
+
     @Override
     public void mouseDragged(MouseEvent e) {
         if (selectedFigure != null) {
-            selectedFigure.moveTo(e.getX(), e.getY());
+            selectedFigure.moveTo(e.getX() - dx, e.getY() - dy);
             setChanged();
             notifyObservers();
         }

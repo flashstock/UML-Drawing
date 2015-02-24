@@ -28,4 +28,14 @@ public class Circle extends Point {
         else return false;
     }
 
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
+    }
+
 }

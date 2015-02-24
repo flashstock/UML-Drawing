@@ -6,7 +6,7 @@ import java.awt.*;
 /**
  * Created by hugg on 24/02/15.
  */
-public class UMLClass extends Point {
+public class UMLClass extends Figure {
     private Quadrangle topBox;
     private Quadrangle bodyBox;
     private JLabel title;
@@ -15,13 +15,13 @@ public class UMLClass extends Point {
     private Dimension titleDimension;
 
     public UMLClass(int x, int y, JLabel title) {
-        super(x, y);
+        super();
         this.x = x;
         this.y = y;
         this.title = title;
         titleDimension = title.getPreferredSize();
         topBox = new Quadrangle(x, y, (int) titleDimension.getWidth() * 2, (int) titleDimension.getHeight());
-        bodyBox = new Quadrangle(x, y, 0, 0);
+        bodyBox = new Quadrangle(x, y, (int) titleDimension.getWidth() * 2, 200);
     }
 
     @Override
@@ -29,6 +29,12 @@ public class UMLClass extends Point {
         topBox.drawSpecific(g);
         bodyBox.drawSpecific(g);
         g.drawChars(title.getText().toCharArray(), 0, title.getText().length(), x + (int) titleDimension.getWidth() / 2, y + (int) titleDimension.getHeight() - 3);
+    }
+
+    @Override
+    public void move(int dx, int dy) {
+        x += dx;
+        y += dy;
     }
 
     @Override
@@ -43,6 +49,16 @@ public class UMLClass extends Point {
         topBox.x = x;
         topBox.y = y;
         bodyBox.x = x;
-        bodyBox.y = y;
+        bodyBox.y = this.y + topBox.height;
+    }
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
     }
 }

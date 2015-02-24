@@ -28,6 +28,15 @@ public class Quadrangle extends Point {
         return rect.contains(x, y);
     }
 
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
+    }
 
 
 }

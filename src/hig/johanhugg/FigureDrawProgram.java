@@ -14,7 +14,9 @@ public class FigureDrawProgram extends JFrame {
         figureList.add(new Circle(300, 300, 5));
         figureList.add(new Circle(400, 400, 2));
         figureList.add(new Quadrangle(500, 200, 200, 80));
-        figureList.add(new UMLClass(200, 200, new JLabel("ASDADSDASDASDASDASD")));
+        figureList.add(new UMLClass(200, 200, new JLabel("Den bästa klassen i hela världen")));
+        figureList.add(new UMLClass(400, 400, new JLabel("Den näst bästa klassen i hela världen")));
+
         FigureViewer figureViewer = new FigureViewer(figureList);
 
         setBounds(0, 0, 800, 600);
@@ -25,6 +27,13 @@ public class FigureDrawProgram extends JFrame {
 
         this.setContentPane(figureViewer);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        JMenuBar jMenuBar = new JMenuBar();
+        JMenu menu = new JMenu("File");
+        menu.setBackground(Color.gray);
+        jMenuBar.add(menu);
+        jMenuBar.setBackground(Color.gray);
+        this.setJMenuBar(jMenuBar);
         setVisible(true);
     }
 

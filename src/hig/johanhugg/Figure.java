@@ -13,7 +13,7 @@ public abstract class Figure implements Drawable {
     }
 
     public Figure() {
-        this(Color.white);
+        this(Color.black);
     }
 
     @Override

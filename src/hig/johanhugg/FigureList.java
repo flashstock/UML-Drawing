@@ -32,4 +32,6 @@ public class FigureList extends Observable implements Iterable<Figure>, Observer
         setChanged();
         this.notifyObservers();
     }
+
+
 }

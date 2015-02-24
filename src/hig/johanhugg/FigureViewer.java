@@ -14,7 +14,7 @@ public class FigureViewer extends JPanel implements Observer {
     public FigureViewer(FigureList figureList) {
         this.figureList = figureList;
         figureList.addObserver(this);
-        setBackground(Color.black);
+        setBackground(Color.white);
     }
 
     @Override

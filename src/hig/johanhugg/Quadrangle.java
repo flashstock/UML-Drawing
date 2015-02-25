@@ -20,7 +20,10 @@ public class Quadrangle extends Point {
     @Override
     protected void drawSpecific(Graphics g) {
         rect.setRect(x, y, width, height);
-        g.drawRect((int) rect.getX(), (int) rect.getY(), (int) rect.getWidth(), (int) rect.getHeight());
+		g.setColor(Color.white);
+		g.fillRect((int) rect.getX(), (int) rect.getY(), (int) rect.getWidth(), (int) rect.getHeight());
+		g.setColor(Color.black);
+		g.drawRect((int) rect.getX(), (int) rect.getY(), (int) rect.getWidth(), (int) rect.getHeight());
     }
 
     @Override

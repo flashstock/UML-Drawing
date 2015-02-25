@@ -21,7 +21,7 @@ public class UMLClass extends Figure {
         this.title = title;
         titleDimension = title.getPreferredSize();
         topBox = new Quadrangle(x, y, (int) titleDimension.getWidth() * 2, (int) titleDimension.getHeight());
-        bodyBox = new Quadrangle(x, y, (int) titleDimension.getWidth() * 2, 200);
+        bodyBox = new Quadrangle(x, this.y + topBox.height, (int) titleDimension.getWidth() * 2, 200);
     }
 
     @Override

@@ -9,7 +9,29 @@ import java.beans.PropertyVetoException;
 public class UMLView extends JFrame {
 	private JMenuBar jMenuBar;
 	private JMenu fileMenu;
+	private JMenu newMenu;
+	private JMenuItem newUMLClass;
+	private JDesktopPane desktopPane;
 
+	public JMenuItem getNewUMLClass() {
+		return newUMLClass;
+	}
+
+	public JMenuBar getjMenuBar() {
+		return jMenuBar;
+	}
+
+	public JMenu getFileMenu() {
+		return fileMenu;
+	}
+
+	public JMenu getNewMenu() {
+		return newMenu;
+	}
+
+	public JDesktopPane getDesktopPane() {
+		return desktopPane;
+	}
 
 	public UMLView() {
 		try {
@@ -26,22 +48,21 @@ public class UMLView extends JFrame {
 
 
 		jMenuBar = new JMenuBar();
-		jMenuBar.add(fileMenu = new JMenu("File"));
+
+		fileMenu = new JMenu("File");
+		jMenuBar.add(fileMenu);
+		newMenu = new JMenu("New");
+		fileMenu.add(newMenu);
+		newUMLClass = new JMenuItem("UML Class");
+		newUMLClass.setActionCommand("New UML Class");
+		newMenu.add(newUMLClass);
+
 		this.setJMenuBar(jMenuBar);
 
+		desktopPane = new JDesktopPane();
 
 
-		JDesktopPane desktop = new JDesktopPane();
-		UMLClassFrame umlClassFrame = new UMLClassFrame();
-		umlClassFrame.setVisible(true);
-		desktop.add(umlClassFrame);
-		try {
-			umlClassFrame.setSelected(true);
-		} catch (PropertyVetoException e) {
-			e.printStackTrace();
-		}
-
-		setContentPane(desktop);
+		setContentPane(desktopPane);
 		//desktop.setDragMode(JDesktopPane.OUTLINE_DRAG_MODE);
 
 
@@ -49,4 +70,6 @@ public class UMLView extends JFrame {
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
+
+
 }

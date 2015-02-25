@@ -7,7 +7,8 @@ import javax.swing.*;
  */
 public class UMLClassFrame extends JInternalFrame {
 	public UMLClassFrame(String title) {
-		super(title, true, true, true, true);
+		super(title, true, false, false, true);
+		setFrameIcon(null);
 		setSize(300, 300);
 		setLocation(100, 100);
 	}

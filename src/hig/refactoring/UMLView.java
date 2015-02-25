@@ -54,7 +54,7 @@ public class UMLView extends JFrame {
 		newMenu = new JMenu("New");
 		fileMenu.add(newMenu);
 		newUMLClass = new JMenuItem("UML Class");
-		newUMLClass.setActionCommand("New UML Class");
+		newUMLClass.setActionCommand(Constants.ACTION_COMMAND_NEWUMLCLASS);
 		newMenu.add(newUMLClass);
 
 		this.setJMenuBar(jMenuBar);

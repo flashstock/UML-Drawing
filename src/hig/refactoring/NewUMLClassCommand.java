@@ -7,16 +7,21 @@ public class NewUMLClassCommand implements Command {
 
 	private UMLClassReceiver umlClassReceiver;
 	private UMLClassFrame umlClassFrame;
-	private String title;
 
 	public NewUMLClassCommand(UMLClassReceiver umlClassReceiver, UMLClassFrame umlClassFrame) {
 		this.umlClassReceiver = umlClassReceiver;
 		this.umlClassFrame = umlClassFrame;
-		this.title = title;
 	}
 
 	@Override
 	public void execute() {
 		umlClassReceiver.addUMLClass(umlClassFrame);
 	}
+
+	@Override
+	public void undo() {
+		umlClassReceiver.removeUMLClass(umlClassFrame);
+	}
+
+
 }

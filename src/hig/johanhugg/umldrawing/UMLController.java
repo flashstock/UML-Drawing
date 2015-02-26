@@ -16,7 +16,6 @@ public class UMLController implements MouseListener, ActionListener {
 	private final UMLModel umlModel;
 	private JDesktopPane desktopPane;
 	private JMenuItem newUMLClass;
-	private UMLClassInvoker umlClassInvoker;
 	private UMLClassReceiver umlClassReceiver;
     private LinkedList<UMLClassFrame> umlClassFrames;
     private UndoRedoStack undoRedoStack;
@@ -25,7 +24,6 @@ public class UMLController implements MouseListener, ActionListener {
 		this.umlView = umlView;
 		this.umlModel = umlModel;
         this.umlClassFrames = new LinkedList<>();
-		this.umlClassInvoker = new UMLClassInvoker();
         this.undoRedoStack = new UndoRedoStack();
 		this.umlClassReceiver = new UMLClassReceiver(umlView.getDesktopPane());
 

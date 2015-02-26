@@ -12,7 +12,7 @@ public class UMLView extends JFrame {
 	private JMenu fileMenu;
 	private JMenu newMenu;
 	private JMenuItem newUMLClass;
-	private JDesktopPane desktopPane;
+	private UMLDesktopPane desktopPane;
 
 	public JMenuItem getNewUMLClass() {
 		return newUMLClass;
@@ -30,25 +30,32 @@ public class UMLView extends JFrame {
 		return newMenu;
 	}
 
-	public JDesktopPane getDesktopPane() {
+	public UMLDesktopPane getDesktopPane() {
 		return desktopPane;
 	}
 
 	public UMLView() {
-		try {
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (UnsupportedLookAndFeelException e) {
-			e.printStackTrace();
-		}
+        try {
+            // Set System L&F
+            UIManager.setLookAndFeel(
+                    UIManager.getSystemLookAndFeelClassName());
+        }
+        catch (UnsupportedLookAndFeelException e) {
+            // handle exception
+        }
+        catch (ClassNotFoundException e) {
+            // handle exception
+        }
+        catch (InstantiationException e) {
+            // handle exception
+        }
+        catch (IllegalAccessException e) {
+            // handle exception
+        }
 
 
-		jMenuBar = new JMenuBar();
+
+        jMenuBar = new JMenuBar();
 
 		fileMenu = new JMenu("File");
 		jMenuBar.add(fileMenu);
@@ -71,7 +78,7 @@ public class UMLView extends JFrame {
 
 		this.setJMenuBar(jMenuBar);
 
-		desktopPane = new JDesktopPane();
+		desktopPane = new UMLDesktopPane();
 
 
 		setContentPane(desktopPane);

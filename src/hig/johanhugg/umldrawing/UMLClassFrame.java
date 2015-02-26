@@ -9,6 +9,7 @@ public class UMLClassFrame extends JInternalFrame {
 	public UMLClassFrame(String title) {
 		super(title, true, false, false, true);
 		setFrameIcon(null);
+        setIconifiable(false);
 		setSize(300, 300);
 		setLocation(100, 100);
 	}

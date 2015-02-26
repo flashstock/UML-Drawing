@@ -1,4 +1,4 @@
-package hig.refactoring;
+package hig.johanhugg.umldrawing;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

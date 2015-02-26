@@ -1,7 +1,6 @@
-package hig.refactoring;
+package hig.johanhugg.umldrawing;
 
 import javax.swing.*;
-import java.beans.PropertyVetoException;
 
 /**
  * Created by Johan on 2015-02-25.

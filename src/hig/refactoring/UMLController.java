@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.beans.PropertyVetoException;
+import java.util.LinkedList;
 
 /**
  * Created by Johan on 2015-02-25.
@@ -18,17 +18,24 @@ public class UMLController implements MouseListener, ActionListener {
 	private JMenuItem newUMLClass;
 	private UMLClassInvoker umlClassInvoker;
 	private UMLClassReceiver umlClassReceiver;
+    private LinkedList<UMLClassFrame> umlClassFrames;
+    private UndoRedoStack undoRedoStack;
+
 	public UMLController(UMLView umlView, UMLModel umlModel) {
 		this.umlView = umlView;
 		this.umlModel = umlModel;
+        this.umlClassFrames = new LinkedList<>();
 		this.umlClassInvoker = new UMLClassInvoker();
+        this.undoRedoStack = new UndoRedoStack();
 		this.umlClassReceiver = new UMLClassReceiver(umlView.getDesktopPane());
+
 		addActionListeners(this);
 	}
 
 	private void addActionListeners(ActionListener actionListener) {
 		umlView.getNewUMLClass().addActionListener(actionListener);
-
+        umlView.getUndoItem().addActionListener(actionListener);
+        umlView.getRedoItem().addActionListener(actionListener);
 	}
 
 
@@ -37,9 +44,19 @@ public class UMLController implements MouseListener, ActionListener {
 		switch(event.getActionCommand()) {
 			case Constants.ACTION_COMMAND_NEWUMLCLASS:
 				System.out.println("HELLO?");
-				umlClassInvoker.setCommand(new NewUMLClassCommand(umlClassReceiver, new UMLClassFrame("TEST")));
-				umlClassInvoker.executeCommand();
+                UMLClassFrame umlClassFrame = new UMLClassFrame("TEST");
+                umlClassFrames.add(umlClassFrame);
+                NewUMLClassCommand umlClassCommand = new NewUMLClassCommand(umlClassReceiver, umlClassFrame);
+				undoRedoStack.redo(umlClassCommand);
 				break;
+            case Constants.ACTION_COMMAND_UNDO:
+                System.out.println("Undo");
+                undoRedoStack.undo();
+                break;
+            case Constants.ACTION_COMMAND_REDO:
+                System.out.println("Redo");
+                undoRedoStack.redo();
+                break;
 			default:
 				System.out.println("Unknown Action");
 				break;

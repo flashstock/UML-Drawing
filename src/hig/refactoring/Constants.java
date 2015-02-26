@@ -5,4 +5,6 @@ package hig.refactoring;
  */
 public class Constants {
 	public static final String ACTION_COMMAND_NEWUMLCLASS =	"New UML Class";
+    public static final String ACTION_COMMAND_UNDO = "Undo";
+    public static final String ACTION_COMMAND_REDO = "Redo";
 }

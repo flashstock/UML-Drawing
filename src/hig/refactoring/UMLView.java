@@ -7,7 +7,9 @@ import java.beans.PropertyVetoException;
  * Created by Johan on 2015-02-25.
  */
 public class UMLView extends JFrame {
-	private JMenuBar jMenuBar;
+    private final JMenuItem undoItem;
+    private final JMenuItem redoItem;
+    private JMenuBar jMenuBar;
 	private JMenu fileMenu;
 	private JMenu newMenu;
 	private JMenuItem newUMLClass;
@@ -51,11 +53,22 @@ public class UMLView extends JFrame {
 
 		fileMenu = new JMenu("File");
 		jMenuBar.add(fileMenu);
+
 		newMenu = new JMenu("New");
 		fileMenu.add(newMenu);
+
 		newUMLClass = new JMenuItem("UML Class");
 		newUMLClass.setActionCommand(Constants.ACTION_COMMAND_NEWUMLCLASS);
 		newMenu.add(newUMLClass);
+
+        undoItem = new JMenuItem("Undo");
+        undoItem.setActionCommand(Constants.ACTION_COMMAND_UNDO);
+        fileMenu.add(undoItem);
+
+        redoItem = new JMenuItem("Redo");
+        redoItem.setActionCommand(Constants.ACTION_COMMAND_REDO);
+        fileMenu.add(redoItem);
+
 
 		this.setJMenuBar(jMenuBar);
 
@@ -72,4 +85,11 @@ public class UMLView extends JFrame {
 	}
 
 
+    public JMenuItem getRedoItem() {
+        return redoItem;
+    }
+
+    public JMenuItem getUndoItem() {
+        return undoItem;
+    }
 }

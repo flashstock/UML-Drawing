@@ -23,5 +23,6 @@ public class UMLClassReceiver {
 
 	public void removeUMLClass(UMLClassFrame umlClassFrame) {
 		desktopPane.remove(umlClassFrame);
+        desktopPane.repaint();
 	}
 }

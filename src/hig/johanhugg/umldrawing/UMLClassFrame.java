@@ -4,7 +4,6 @@ import net.miginfocom.layout.CC;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 /**
@@ -15,13 +14,12 @@ public class UMLClassFrame extends JInternalFrame {
 	private BorderLayout panelLayout;
 
 	private JPanel parentPanel;
-	private JPanel titlePanel;
-	private JPanel bottomPanel;
-
 	private JLabel titleLabel;
 
-	public UMLClassFrame(String title) {
-		super(title, true, false, false, true);
+	private UMLClass associatedClass;
+
+	public UMLClassFrame(UMLClass associatedClass) {
+		super(associatedClass.getName(), true, false, false, true);
 		setFrameIcon(null);
         setIconifiable(false);
 		setSize(300, 300);
@@ -29,19 +27,17 @@ public class UMLClassFrame extends JInternalFrame {
 		titleLabel = new JLabel(title);
 
 		this.parentPanel = new JPanel();
-		parentPanel.setLayout(new MigLayout("fillx, debug"));
+		parentPanel.setBackground(Color.white);
+		parentPanel.setLayout(new MigLayout("fillx"));
 		CC componentConstraints = new CC();
 		componentConstraints.alignX("center").spanX();
 		titleLabel.setFont(titleLabel.getFont().deriveFont(18.0f));
 		parentPanel.add(titleLabel, componentConstraints);
 		parentPanel.add(new JLabel("Test"), "wrap");
 
-
-
 		this.add(parentPanel);
 
-
-
-
 	}
+
+
 }

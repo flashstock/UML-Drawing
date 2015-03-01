@@ -8,7 +8,9 @@ import javax.swing.*;
 public class UMLView extends JFrame {
     private final JMenuItem undoItem;
     private final JMenuItem redoItem;
-    private JMenuBar jMenuBar;
+	private final JMenu editMenu;
+	private final JMenuItem addAttributeItem;
+	private JMenuBar menubar;
 	private JMenu fileMenu;
 	private JMenu newMenu;
 	private JMenuItem newUMLClass;
@@ -18,8 +20,8 @@ public class UMLView extends JFrame {
 		return newUMLClass;
 	}
 
-	public JMenuBar getjMenuBar() {
-		return jMenuBar;
+	public JMenuBar getMenubar() {
+		return menubar;
 	}
 
 	public JMenu getFileMenu() {
@@ -53,12 +55,22 @@ public class UMLView extends JFrame {
             // handle exception
         }
 
+		UMLAssociationManager associationManager = new UMLAssociationManager();
+		UMLClass class1 = new UMLClass("Test");
+		UMLClass class2 = new UMLClass("Testes");
+
+		UMLClass class3 = new UMLClass("Test123");
+
+		associationManager.makeAssociation(class1, class3, new RawAssociation());
+		associationManager.makeAssociation(class1, class2, new RawAssociation());
+		associationManager.relatedWith(class1);
+		associationManager.relatedWith(class2);
 
 
-        jMenuBar = new JMenuBar();
+        menubar = new JMenuBar();
 
 		fileMenu = new JMenu("File");
-		jMenuBar.add(fileMenu);
+		menubar.add(fileMenu);
 
 		newMenu = new JMenu("New");
 		fileMenu.add(newMenu);
@@ -75,14 +87,19 @@ public class UMLView extends JFrame {
         redoItem.setActionCommand(Constants.ACTION_COMMAND_REDO);
         fileMenu.add(redoItem);
 
+		editMenu = new JMenu("Edit");
+		menubar.add(editMenu);
 
-		this.setJMenuBar(jMenuBar);
+		addAttributeItem = new JMenuItem("Add Attribute");
+		editMenu.add(addAttributeItem);
+
+
+		this.setJMenuBar(menubar);
 
 		desktopPane = new UMLDesktopPane();
 
 
 		setContentPane(desktopPane);
-		//desktop.setDragMode(JDesktopPane.OUTLINE_DRAG_MODE);
 
 
 		setBounds(0, 0, 1024, 768);
@@ -98,4 +115,12 @@ public class UMLView extends JFrame {
     public JMenuItem getUndoItem() {
         return undoItem;
     }
+
+	public JMenu getEditMenu() {
+		return editMenu;
+	}
+
+	public JMenuItem getAddAttributeItem() {
+		return addAttributeItem;
+	}
 }

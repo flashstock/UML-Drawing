@@ -14,8 +14,6 @@ public class UMLController implements MouseListener, ActionListener {
 
 	private final UMLView umlView;
 	private final UMLModel umlModel;
-	private JDesktopPane desktopPane;
-	private JMenuItem newUMLClass;
 	private UMLClassReceiver umlClassReceiver;
     private LinkedList<UMLClassFrame> umlClassFrames;
     private UndoRedoStack undoRedoStack;
@@ -41,10 +39,10 @@ public class UMLController implements MouseListener, ActionListener {
 	public void actionPerformed(ActionEvent event) {
 		switch(event.getActionCommand()) {
 			case Constants.ACTION_COMMAND_NEWUMLCLASS:
-				System.out.println("HELLO?");
-                UMLClassFrame umlClassFrame = new UMLClassFrame("TEST");
+				String classTitle = JOptionPane.showInputDialog("Input Class Name");
+				UMLClassFrame umlClassFrame = new UMLClassFrame(new UMLClass(classTitle));
                 umlClassFrames.add(umlClassFrame);
-                NewUMLClassCommand umlClassCommand = new NewUMLClassCommand(umlClassReceiver, umlClassFrame);
+                Command umlClassCommand = UMLCommandFactory.createNewUMLClassCommand(umlClassReceiver, umlClassFrame);
 				undoRedoStack.redo(umlClassCommand);
 				break;
             case Constants.ACTION_COMMAND_UNDO:

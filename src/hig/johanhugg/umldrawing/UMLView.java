@@ -10,7 +10,8 @@ public class UMLView extends JFrame {
     private final JMenuItem redoItem;
 	private final JMenu editMenu;
 	private final JMenuItem addAttributeItem;
-	private JMenuBar menubar;
+    private final JMenuItem removeAttributeItem;
+    private JMenuBar menubar;
 	private JMenu fileMenu;
 	private JMenu newMenu;
 	private JMenuItem newUMLClass;
@@ -91,7 +92,13 @@ public class UMLView extends JFrame {
 		menubar.add(editMenu);
 
 		addAttributeItem = new JMenuItem("Add Attribute");
+        addAttributeItem.setActionCommand(Constants.ACTION_COMMAND_ADDATTRIBUTE);
 		editMenu.add(addAttributeItem);
+
+        removeAttributeItem = new JMenuItem("Remove Attribute");
+        removeAttributeItem.setActionCommand(Constants.ACTION_COMMAND_REMOVEATTRIBUTE);
+        editMenu.add(removeAttributeItem);
+
 
 
 		this.setJMenuBar(menubar);
@@ -123,4 +130,8 @@ public class UMLView extends JFrame {
 	public JMenuItem getAddAttributeItem() {
 		return addAttributeItem;
 	}
+
+    public JMenuItem getRemoveAttributeItem() {
+        return removeAttributeItem;
+    }
 }

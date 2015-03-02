@@ -32,13 +32,17 @@ public class UMLController implements MouseListener, ActionListener {
 		umlView.getNewUMLClass().addActionListener(actionListener);
         umlView.getUndoItem().addActionListener(actionListener);
         umlView.getRedoItem().addActionListener(actionListener);
+        umlView.getAddAttributeItem().addActionListener(actionListener);
+        umlView.getRemoveAttributeItem().addActionListener(actionListener);
 	}
 
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
+        UMLClassFrame selectedFrame = getSelectedUMLClassFrame();
 		switch(event.getActionCommand()) {
-			case Constants.ACTION_COMMAND_NEWUMLCLASS:
+
+            case Constants.ACTION_COMMAND_NEWUMLCLASS:
 				String classTitle = JOptionPane.showInputDialog("Input Class Name");
 				UMLClassFrame umlClassFrame = new UMLClassFrame(new UMLClass(classTitle));
                 umlClassFrames.add(umlClassFrame);
@@ -53,11 +57,30 @@ public class UMLController implements MouseListener, ActionListener {
                 System.out.println("Redo");
                 undoRedoStack.redo();
                 break;
+            case Constants.ACTION_COMMAND_ADDATTRIBUTE:
+                System.out.println("ADDATTRIB");
+                if (selectedFrame != null) {
+                    Command addAttributeCommand = UMLCommandFactory.addAttributeToClass(selectedFrame, new UMLAttribute("Asd"));
+                    undoRedoStack.redo(addAttributeCommand);
+                }
+                else
+                    System.out.println("No frame selected");
+                break;
+            case Constants.ACTION_COMMAND_REMOVEATTRIBUTE:
+                System.out.println("Remove Attrib");
+                if (selectedFrame != null) {
+                    //Command removeAttributeCommand = UMLCommandFactory.removeAttributeFromClass()
+                }
+                break;
 			default:
 				System.out.println("Unknown Action");
 				break;
 		}
 	}
+
+    private UMLClassFrame getSelectedUMLClassFrame() {
+        return (UMLClassFrame) umlView.getDesktopPane().getSelectedFrame();
+    }
 
 	@Override
 	public void mouseClicked(MouseEvent e) {

@@ -52,7 +52,7 @@ crashlytics-build.properties
 
 # Package Files #
 *.jar
-!lib/*
+!lib/*.jar
 *.war
 *.ear
 

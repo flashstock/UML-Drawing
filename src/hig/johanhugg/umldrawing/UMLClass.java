@@ -26,4 +26,8 @@ public class UMLClass {
 	public void addAttribute(UMLAttribute attribute) {
 		umlAttributes.add(attribute);
 	}
+
+    public void removeAttribute(UMLAttribute attribute) {
+        umlAttributes.remove(attribute);
+    }
 }

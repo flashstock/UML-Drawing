@@ -37,7 +37,6 @@ public class UMLClassFrame extends JInternalFrame {
 		componentConstraints.alignX("center").spanX();
 		titleLabel.setFont(titleLabel.getFont().deriveFont(18.0f));
 		parentPanel.add(titleLabel, componentConstraints);
-		parentPanel.add(new JLabel("Test"), "wrap");
 
 		this.add(parentPanel);
 
@@ -47,14 +46,27 @@ public class UMLClassFrame extends JInternalFrame {
         JLabel addedAttr;
         this.attributeDict.put(attribute, addedAttr = new JLabel(attribute.toString()));
         parentPanel.add(addedAttr, "wrap");
-        parentPanel.revalidate();
         associatedClass.addAttribute(attribute);
+        update();
     }
 
     public void removeAttribute(UMLAttribute attribute) {
         JLabel associatedLabel = attributeDict.get(attribute);
         parentPanel.remove(associatedLabel);
         attributeDict.remove(attribute);
+        associatedClass.removeAttribute(attribute);
+        update();
     }
+
+    public List<UMLAttribute> getAttributes() {
+        return associatedClass.getAttributes();
+    }
+
+    private void update() {
+        this.revalidate();
+        this.repaint();
+    }
+
+
 
 }

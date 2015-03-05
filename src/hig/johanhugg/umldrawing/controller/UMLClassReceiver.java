@@ -1,4 +1,6 @@
-package hig.johanhugg.umldrawing;
+package hig.johanhugg.umldrawing.controller;
+
+import hig.johanhugg.umldrawing.view.UMLClassFrame;
 
 import javax.swing.*;
 import java.util.LinkedList;
@@ -8,12 +10,9 @@ import java.util.LinkedList;
  */
 public class UMLClassReceiver {
 	private JDesktopPane desktopPane;
-	private UMLClassFrame umlClassFrame;
-	private LinkedList<UMLClassFrame> umlClassFrames;
 
 	public UMLClassReceiver(JDesktopPane desktopPane) {
 		this.desktopPane = desktopPane;
-		this.umlClassFrames = new LinkedList<>();
 	}
 
 	public void addUMLClass(UMLClassFrame umlClassFrame) {

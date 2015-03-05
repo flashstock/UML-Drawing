@@ -1,4 +1,4 @@
-package hig.johanhugg.umldrawing;
+package hig.johanhugg.umldrawing.commands;
 
 /**
  * Created by Johan on 2015-02-25.

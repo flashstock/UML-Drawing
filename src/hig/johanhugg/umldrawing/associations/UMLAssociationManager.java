@@ -1,5 +1,6 @@
-package hig.johanhugg.umldrawing;
+package hig.johanhugg.umldrawing.associations;
 
+import hig.johanhugg.umldrawing.model.UMLClass;
 import org.javatuples.Triplet;
 import org.javatuples.Tuple;
 

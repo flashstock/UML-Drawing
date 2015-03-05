@@ -1,5 +1,9 @@
 package hig.johanhugg.umldrawing;
 
+import hig.johanhugg.umldrawing.controller.UMLController;
+import hig.johanhugg.umldrawing.model.UMLModel;
+import hig.johanhugg.umldrawing.view.UMLView;
+
 import javax.swing.*;
 
 /**

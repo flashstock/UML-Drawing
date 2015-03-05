@@ -1,4 +1,4 @@
-package hig.johanhugg.umldrawing;
+package hig.johanhugg.umldrawing.view;
 
 import javax.swing.*;
 import java.awt.*;

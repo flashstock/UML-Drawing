@@ -1,4 +1,4 @@
-package hig.johanhugg.umldrawing;
+package hig.johanhugg.umldrawing.model;
 
 import java.util.LinkedList;
 

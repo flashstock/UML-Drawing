@@ -1,5 +1,7 @@
-package hig.johanhugg.umldrawing;
+package hig.johanhugg.umldrawing.view;
 
+import hig.johanhugg.umldrawing.model.UMLAttribute;
+import hig.johanhugg.umldrawing.model.UMLClass;
 import net.miginfocom.layout.CC;
 import net.miginfocom.swing.MigLayout;
 
@@ -7,8 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 /**
  * Created by Johan on 2015-02-25.

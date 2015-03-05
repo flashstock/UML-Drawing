@@ -1,4 +1,7 @@
-package hig.johanhugg.umldrawing;
+package hig.johanhugg.umldrawing.commands;
+
+import hig.johanhugg.umldrawing.model.UMLAttribute;
+import hig.johanhugg.umldrawing.view.UMLClassFrame;
 
 /**
  * Created by hugg on 02/03/15.

@@ -1,4 +1,6 @@
-package hig.johanhugg.umldrawing;
+package hig.johanhugg.umldrawing.model;
+
+import hig.johanhugg.umldrawing.commands.Command;
 
 import java.util.Stack;
 

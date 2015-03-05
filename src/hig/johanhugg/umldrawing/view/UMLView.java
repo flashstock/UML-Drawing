@@ -1,4 +1,9 @@
-package hig.johanhugg.umldrawing;
+package hig.johanhugg.umldrawing.view;
+
+import hig.johanhugg.umldrawing.associations.RawAssociation;
+import hig.johanhugg.umldrawing.associations.UMLAssociationManager;
+import hig.johanhugg.umldrawing.model.Constants;
+import hig.johanhugg.umldrawing.model.UMLClass;
 
 import javax.swing.*;
 

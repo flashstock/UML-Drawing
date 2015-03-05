@@ -1,11 +1,20 @@
-package hig.johanhugg.umldrawing;
+package hig.johanhugg.umldrawing.controller;
+
+import hig.johanhugg.umldrawing.model.Constants;
+import hig.johanhugg.umldrawing.model.UndoRedoStack;
+import hig.johanhugg.umldrawing.commands.Command;
+import hig.johanhugg.umldrawing.commands.UMLCommandFactory;
+import hig.johanhugg.umldrawing.model.UMLAttribute;
+import hig.johanhugg.umldrawing.model.UMLClass;
+import hig.johanhugg.umldrawing.model.UMLModel;
+import hig.johanhugg.umldrawing.view.UMLClassFrame;
+import hig.johanhugg.umldrawing.view.UMLView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -100,7 +109,7 @@ public class UMLController implements MouseListener, ActionListener {
             return;
         UMLClassFrame umlClassFrame = new UMLClassFrame(new UMLClass(classTitle));
         umlClassFrames.add(umlClassFrame);
-        Command umlClassCommand = UMLCommandFactory.createNewUMLClassCommand(umlClassReceiver, umlClassFrame);
+        Command umlClassCommand = UMLCommandFactory.newUMLClassCommand(umlClassReceiver, umlClassFrame);
         undoRedoStack.redo(umlClassCommand);
     }
 

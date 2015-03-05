@@ -21,12 +21,12 @@ public class UMLClassFrame extends JInternalFrame {
     private Dictionary<UMLAttribute, JLabel> attributeDict;
 
 	public UMLClassFrame(UMLClass associatedClass) {
-		super(associatedClass.getName(), true, false, false, true);
+		super(null, true, false, false, true);
 		setFrameIcon(null);
         setIconifiable(false);
 		setSize(300, 300);
 		setLocation(100, 100);
-		titleLabel = new JLabel(title);
+		titleLabel = new JLabel(associatedClass.getName());
         this.associatedClass = associatedClass;
         this.attributeDict = new Hashtable<>();
 

@@ -9,4 +9,5 @@ public class Constants {
     public static final String ACTION_COMMAND_REDO = "Redo";
     public static final String ACTION_COMMAND_ADDATTRIBUTE = "Add Attribute";
     public static final String ACTION_COMMAND_REMOVEATTRIBUTE = "Remove Attribute";
+    public static final String ACTION_COMMAND_NEWASSOCIATION = "Create Association";
 }

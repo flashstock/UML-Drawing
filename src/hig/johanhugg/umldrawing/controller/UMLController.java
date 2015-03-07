@@ -1,5 +1,6 @@
 package hig.johanhugg.umldrawing.controller;
 
+import hig.johanhugg.umldrawing.associations.AssociationFactory;
 import hig.johanhugg.umldrawing.model.Constants;
 import hig.johanhugg.umldrawing.model.UndoRedoStack;
 import hig.johanhugg.umldrawing.commands.Command;
@@ -45,6 +46,7 @@ public class UMLController implements MouseListener, ActionListener {
         umlView.getRedoItem().addActionListener(actionListener);
         umlView.getAddAttributeItem().addActionListener(actionListener);
         umlView.getRemoveAttributeItem().addActionListener(actionListener);
+        umlView.getAddAssociationItem().addActionListener(actionListener);
 	}
 
 
@@ -72,11 +74,28 @@ public class UMLController implements MouseListener, ActionListener {
             case Constants.ACTION_COMMAND_REMOVEATTRIBUTE:
                 removeAttribute(selectedFrame);
                 break;
+            case Constants.ACTION_COMMAND_NEWASSOCIATION:
+                createAssociation(selectedFrame);
+                break;
 			default:
 				System.out.println("Unknown Action");
 				break;
 		}
 	}
+
+    private void createAssociation(UMLClassFrame selectedFrame) {
+        UMLClassFrame otherFrame = (UMLClassFrame) JOptionPane.showInputDialog(
+                selectedFrame,
+                "Please choose the other class to create an association with",
+                "Create Association",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                umlClassFrames.toArray(),
+                null
+        );
+        Command addAssociationCommand = UMLCommandFactory.createAssociation(selectedFrame, otherFrame, AssociationFactory.createRawAssociation("Test"));
+        undoRedoStack.redo(addAssociationCommand);
+    }
 
     private void removeAttribute(UMLClassFrame selectedFrame) {
         List<UMLAttribute> umlAttributes = selectedFrame.getAttributes();

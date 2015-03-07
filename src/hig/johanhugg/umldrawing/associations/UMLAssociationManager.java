@@ -15,6 +15,7 @@ public class UMLAssociationManager {
 	public UMLAssociationManager() {
 		associations = new ArrayList<>();
 	}
+    private boolean changed = false;
 
 	public void makeAssociation(UMLClass first, UMLClass second, Association associationType) {
 		associations.add(Triplet.with(first, second, associationType));
@@ -30,10 +31,23 @@ public class UMLAssociationManager {
 					foundRelations.add((UMLClass) t.getValue(0));
 			}
 		}
-		System.out.println(umlClass.getName() + " is related with: ");
-		for (UMLClass found : foundRelations)
-			System.out.println(found.getName());
-		return foundRelations;
+        if (foundRelations.size() > 0) {
+            //System.out.println(umlClass.getName() + " is related with: ");
+            //for (UMLClass found : foundRelations)
+            //    System.out.println(found.getName());
+
+        }
+        return foundRelations;
 	}
 
+    public void removeAssociation(UMLClass first, UMLClass second) {
+        Triplet toRemove = null;
+        for (Triplet t : associations) {
+            if (t.contains(first) && t.contains(second)) {
+                toRemove = t;
+            }
+        }
+        if (toRemove != null)
+            associations.remove(toRemove);
+    }
 }

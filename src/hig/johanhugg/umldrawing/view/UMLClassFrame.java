@@ -7,6 +7,8 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.*;
 import java.util.List;
 
@@ -38,6 +40,16 @@ public class UMLClassFrame extends JInternalFrame {
 		titleLabel.setFont(titleLabel.getFont().deriveFont(18.0f));
 		parentPanel.add(titleLabel, componentConstraints);
 
+        this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentMoved(ComponentEvent e) {
+                super.componentMoved(e);
+                getDesktopPane().repaint();
+                //We need this so that the desktoppane repaints itself everytime the component is moved, otherwise lines will look weird.
+                //This also saves performance since we only repaint when the component is moved, not all the time the line is drawn.
+            }
+        });
+
 		this.add(parentPanel);
 
 	}
@@ -66,6 +78,16 @@ public class UMLClassFrame extends JInternalFrame {
         this.revalidate();
         this.repaint();
     }
+
+    public UMLClass getAssociatedClass() {
+        return associatedClass;
+    }
+
+    @Override
+    public String toString() {
+        return associatedClass.getName();
+    }
+
 
 
 

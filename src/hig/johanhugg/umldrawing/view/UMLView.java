@@ -16,11 +16,16 @@ public class UMLView extends JFrame {
 	private final JMenu editMenu;
 	private final JMenuItem addAttributeItem;
     private final JMenuItem removeAttributeItem;
+    private final JMenuItem addAssociationItem;
     private JMenuBar menubar;
 	private JMenu fileMenu;
 	private JMenu newMenu;
 	private JMenuItem newUMLClass;
 	private UMLDesktopPane desktopPane;
+
+    public JMenuItem getAddAssociationItem() {
+        return addAssociationItem;
+    }
 
 	public JMenuItem getNewUMLClass() {
 		return newUMLClass;
@@ -61,16 +66,16 @@ public class UMLView extends JFrame {
             // handle exception
         }
 
-		UMLAssociationManager associationManager = new UMLAssociationManager();
-		UMLClass class1 = new UMLClass("Test");
-		UMLClass class2 = new UMLClass("Testes");
-
-		UMLClass class3 = new UMLClass("Test123");
-
-		associationManager.makeAssociation(class1, class3, new RawAssociation());
-		associationManager.makeAssociation(class1, class2, new RawAssociation());
-		associationManager.relatedWith(class1);
-		associationManager.relatedWith(class2);
+//		UMLAssociationManager associationManager = new UMLAssociationManager();
+//		UMLClass class1 = new UMLClass("Test");
+//		UMLClass class2 = new UMLClass("Testes");
+//
+//		UMLClass class3 = new UMLClass("Test123");
+//
+//		associationManager.makeAssociation(class1, class3, new RawAssociation());
+//		associationManager.makeAssociation(class1, class2, new RawAssociation());
+//		associationManager.relatedWith(class1);
+//		associationManager.relatedWith(class2);
 
 
         menubar = new JMenuBar();
@@ -104,11 +109,15 @@ public class UMLView extends JFrame {
         removeAttributeItem.setActionCommand(Constants.ACTION_COMMAND_REMOVEATTRIBUTE);
         editMenu.add(removeAttributeItem);
 
+        addAssociationItem = new JMenuItem("Add Association");
+        addAssociationItem.setActionCommand(Constants.ACTION_COMMAND_NEWASSOCIATION);
+        editMenu.add(addAssociationItem);
+
 
 
 		this.setJMenuBar(menubar);
 
-		desktopPane = new UMLDesktopPane();
+		desktopPane = new UMLDesktopPane(new UMLAssociationManager());
 
 
 		setContentPane(desktopPane);

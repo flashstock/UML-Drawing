@@ -17,11 +17,16 @@ public class UMLView extends JFrame {
 	private final JMenuItem addAttributeItem;
     private final JMenuItem removeAttributeItem;
     private final JMenuItem addAssociationItem;
-    private JMenuBar menubar;
+	private final JMenuItem removeClassItem;
+	private JMenuBar menubar;
 	private JMenu fileMenu;
 	private JMenu newMenu;
 	private JMenuItem newUMLClass;
 	private UMLDesktopPane desktopPane;
+
+	public JMenuItem getRemoveClassItem() {
+		return removeClassItem;
+	}
 
     public JMenuItem getAddAssociationItem() {
         return addAssociationItem;
@@ -112,6 +117,10 @@ public class UMLView extends JFrame {
         addAssociationItem = new JMenuItem("Add Association");
         addAssociationItem.setActionCommand(Constants.ACTION_COMMAND_NEWASSOCIATION);
         editMenu.add(addAssociationItem);
+
+		removeClassItem = new JMenuItem("Remove this class");
+		removeClassItem.setActionCommand(Constants.ACTION_COMMAND_REMOVECLASS);
+		editMenu.add(removeClassItem);
 
 
 

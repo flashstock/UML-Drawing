@@ -1,5 +1,6 @@
 package hig.johanhugg.umldrawing.controller;
 
+import hig.johanhugg.umldrawing.associations.Association;
 import hig.johanhugg.umldrawing.associations.AssociationFactory;
 import hig.johanhugg.umldrawing.model.Constants;
 import hig.johanhugg.umldrawing.model.UndoRedoStack;
@@ -18,6 +19,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Johan on 2015-02-25.
@@ -47,6 +49,7 @@ public class UMLController implements MouseListener, ActionListener {
         umlView.getAddAttributeItem().addActionListener(actionListener);
         umlView.getRemoveAttributeItem().addActionListener(actionListener);
         umlView.getAddAssociationItem().addActionListener(actionListener);
+		umlView.getRemoveClassItem().addActionListener(actionListener);
 	}
 
 
@@ -77,23 +80,43 @@ public class UMLController implements MouseListener, ActionListener {
             case Constants.ACTION_COMMAND_NEWASSOCIATION:
                 createAssociation(selectedFrame);
                 break;
+			case Constants.ACTION_COMMAND_REMOVECLASS:
+				removeClass(selectedFrame);
+				break;
 			default:
 				System.out.println("Unknown Action");
 				break;
+
 		}
 	}
 
-    private void createAssociation(UMLClassFrame selectedFrame) {
+	private void removeClass(UMLClassFrame selectedFrame) {
+		Command removeClassCommand = UMLCommandFactory.removeClass(selectedFrame);
+		undoRedoStack.redo(removeClassCommand);
+
+	}
+
+	private void createAssociation(UMLClassFrame selectedFrame) {
         UMLClassFrame otherFrame = (UMLClassFrame) JOptionPane.showInputDialog(
                 selectedFrame,
                 "Please choose the other class to create an association with",
                 "Create Association",
                 JOptionPane.PLAIN_MESSAGE,
                 null,
-                umlClassFrames.toArray(),
+                umlClassFrames.stream().filter(x -> !x.equals(selectedFrame)).collect(Collectors.toList()).toArray(),
                 null
         );
-        Command addAssociationCommand = UMLCommandFactory.createAssociation(selectedFrame, otherFrame, AssociationFactory.createRawAssociation("Test"));
+		String selectedAssociationType = (String) JOptionPane.showInputDialog(
+				selectedFrame,
+				"Please choose the type of association you want",
+				"Choose association type",
+				JOptionPane.PLAIN_MESSAGE,
+				null,
+				AssociationFactory.getListOfAssocations().toArray(),
+				null
+		);
+		Association type = AssociationFactory.createAssociationFromString(selectedAssociationType);
+        Command addAssociationCommand = UMLCommandFactory.createAssociation(selectedFrame, otherFrame, type);
         undoRedoStack.redo(addAssociationCommand);
     }
 
@@ -124,7 +147,7 @@ public class UMLController implements MouseListener, ActionListener {
 
     private void newUMLClass() {
         String classTitle = JOptionPane.showInputDialog("Input Class Name");
-        if (classTitle.isEmpty())
+        if (classTitle == null || classTitle.isEmpty())
             return;
         UMLClassFrame umlClassFrame = new UMLClassFrame(new UMLClass(classTitle));
         umlClassFrames.add(umlClassFrame);

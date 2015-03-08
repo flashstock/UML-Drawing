@@ -10,4 +10,6 @@ public class Constants {
     public static final String ACTION_COMMAND_ADDATTRIBUTE = "Add Attribute";
     public static final String ACTION_COMMAND_REMOVEATTRIBUTE = "Remove Attribute";
     public static final String ACTION_COMMAND_NEWASSOCIATION = "Create Association";
+	public static final String ASSOCIATION_RAWASSOCIATION = "Raw Association";
+	public static final String ACTION_COMMAND_REMOVECLASS = "Remove Class";
 }

@@ -5,4 +5,5 @@ package hig.johanhugg.umldrawing.associations;
  */
 public interface Association {
 	public String getType();
+	public String toString();
 }

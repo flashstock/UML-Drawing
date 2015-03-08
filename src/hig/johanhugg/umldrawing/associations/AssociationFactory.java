@@ -1,5 +1,7 @@
 package hig.johanhugg.umldrawing.associations;
 
+import hig.johanhugg.umldrawing.model.Constants;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,15 +10,27 @@ import java.util.List;
  * Created by hugg on 07/03/15.
  */
 public class AssociationFactory {
-    public static Association createRawAssociation(String name) {
-        return new RawAssociation(name);
+    public static Association createRawAssociation() {
+        return new RawAssociation();
     }
 
-    public List<Association> getListOfAssocations() {
-        List<Association> tmp = new LinkedList<>();
+    public static List<String> getListOfAssocations() {
+		List<String> associations = new LinkedList<>();
 
-        tmp.add(createRawAssociation("Sample"));
+		associations.add(Constants.ASSOCIATION_RAWASSOCIATION);
 
-        return tmp;
+        return associations;
     }
+
+	public static Association createAssociationFromString(String type) {
+		switch (type) {
+			case Constants.ASSOCIATION_RAWASSOCIATION:
+				return createRawAssociation();
+			default:
+				return null;
+		}
+	}
+
+
+
 }

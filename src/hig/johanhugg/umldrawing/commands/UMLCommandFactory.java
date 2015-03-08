@@ -24,4 +24,8 @@ public class UMLCommandFactory {
     public static Command createAssociation(UMLClassFrame selectedFrame, UMLClassFrame otherFrame, Association type) {
         return new CreateAssociationCommand(selectedFrame, otherFrame, type);
     }
+
+	public static Command removeClass(UMLClassFrame selectedFrame) {
+		return new RemoveClassCommand(selectedFrame);
+	}
 }

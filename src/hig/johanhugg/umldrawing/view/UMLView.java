@@ -6,6 +6,8 @@ import hig.johanhugg.umldrawing.model.Constants;
 import hig.johanhugg.umldrawing.model.UMLClass;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyEvent;
 
 /**
  * Created by Johan on 2015-02-25.
@@ -71,64 +73,59 @@ public class UMLView extends JFrame {
             // handle exception
         }
 
-//		UMLAssociationManager associationManager = new UMLAssociationManager();
-//		UMLClass class1 = new UMLClass("Test");
-//		UMLClass class2 = new UMLClass("Testes");
-//
-//		UMLClass class3 = new UMLClass("Test123");
-//
-//		associationManager.makeAssociation(class1, class3, new RawAssociation());
-//		associationManager.makeAssociation(class1, class2, new RawAssociation());
-//		associationManager.relatedWith(class1);
-//		associationManager.relatedWith(class2);
-
 
         menubar = new JMenuBar();
 
 		fileMenu = new JMenu("File");
+		fileMenu.setMnemonic(KeyEvent.VK_F);
 		menubar.add(fileMenu);
 
 		newMenu = new JMenu("New");
+		newMenu.setMnemonic(KeyEvent.VK_N);
 		fileMenu.add(newMenu);
 
 		newUMLClass = new JMenuItem("UML Class");
 		newUMLClass.setActionCommand(Constants.ACTION_COMMAND_NEWUMLCLASS);
+		newUMLClass.setMnemonic(KeyEvent.VK_U);
 		newMenu.add(newUMLClass);
 
         undoItem = new JMenuItem("Undo");
         undoItem.setActionCommand(Constants.ACTION_COMMAND_UNDO);
+		undoItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, Event.CTRL_MASK));
         fileMenu.add(undoItem);
 
         redoItem = new JMenuItem("Redo");
         redoItem.setActionCommand(Constants.ACTION_COMMAND_REDO);
+		redoItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, Event.CTRL_MASK | Event.SHIFT_MASK));
         fileMenu.add(redoItem);
 
 		editMenu = new JMenu("Edit");
+		editMenu.setMnemonic(KeyEvent.VK_E);
 		menubar.add(editMenu);
 
 		addAttributeItem = new JMenuItem("Add Attribute");
         addAttributeItem.setActionCommand(Constants.ACTION_COMMAND_ADDATTRIBUTE);
+		addAttributeItem.setMnemonic(KeyEvent.VK_A);
 		editMenu.add(addAttributeItem);
 
         removeAttributeItem = new JMenuItem("Remove Attribute");
         removeAttributeItem.setActionCommand(Constants.ACTION_COMMAND_REMOVEATTRIBUTE);
+		removeAttributeItem.setMnemonic(KeyEvent.VK_R);
         editMenu.add(removeAttributeItem);
 
         addAssociationItem = new JMenuItem("Add Association");
         addAssociationItem.setActionCommand(Constants.ACTION_COMMAND_NEWASSOCIATION);
+		addAssociationItem.setMnemonic(KeyEvent.VK_S);
+		addAssociationItem.setDisplayedMnemonicIndex(5);
         editMenu.add(addAssociationItem);
 
 		removeClassItem = new JMenuItem("Remove this class");
+		removeClassItem.setMnemonic(KeyEvent.VK_C);
 		removeClassItem.setActionCommand(Constants.ACTION_COMMAND_REMOVECLASS);
 		editMenu.add(removeClassItem);
 
-
-
 		this.setJMenuBar(menubar);
-
 		desktopPane = new UMLDesktopPane(new UMLAssociationManager());
-
-
 		setContentPane(desktopPane);
 
 

@@ -2,13 +2,9 @@ package hig.johanhugg.umldrawing.controller;
 
 import hig.johanhugg.umldrawing.associations.Association;
 import hig.johanhugg.umldrawing.associations.AssociationFactory;
-import hig.johanhugg.umldrawing.model.Constants;
-import hig.johanhugg.umldrawing.model.UndoRedoStack;
+import hig.johanhugg.umldrawing.model.*;
 import hig.johanhugg.umldrawing.commands.Command;
 import hig.johanhugg.umldrawing.commands.UMLCommandFactory;
-import hig.johanhugg.umldrawing.model.UMLAttribute;
-import hig.johanhugg.umldrawing.model.UMLClass;
-import hig.johanhugg.umldrawing.model.UMLModel;
 import hig.johanhugg.umldrawing.view.UMLClassFrame;
 import hig.johanhugg.umldrawing.view.UMLView;
 
@@ -133,19 +129,117 @@ public class UMLController implements MouseListener, ActionListener {
                 umlAttributes.toArray(),
                 null
         );
+
+		if (selectedAttribute == null)
+			return;
+
         Command removeAttributeCommand = UMLCommandFactory.removeAttributeFromClass(selectedFrame, selectedAttribute);
         undoRedoStack.redo(removeAttributeCommand);
     }
 
     private void addAttribute(UMLClassFrame selectedFrame) {
-        String attributeName = JOptionPane.showInputDialog("Please enter attribute name");
-        if (attributeName.isEmpty())
+
+		String selectedAttributeType = (String) JOptionPane.showInputDialog(
+				selectedFrame,
+				"Please choose the type of attribute you want",
+				"Choose attribute type",
+				JOptionPane.PLAIN_MESSAGE,
+				null,
+				UMLAttributeFactory.getListOfAttributes().toArray(),
+				null
+		);
+        if (selectedAttributeType == null || selectedAttributeType.isEmpty())
             return;
-        Command addAttributeCommand = UMLCommandFactory.addAttributeToClass(selectedFrame, new UMLAttribute(attributeName));
+
+		UMLAttribute selectedAttribute = selectAttributeCommand(selectedAttributeType, selectedFrame);
+
+		if (selectedAttribute == null)
+			return;
+		Command addAttributeCommand = UMLCommandFactory.addAttributeToClass(selectedFrame, selectedAttribute);
         undoRedoStack.redo(addAttributeCommand);
     }
 
-    private void newUMLClass() {
+	private UMLAttribute selectAttributeCommand(String selectedAttributeType, UMLClassFrame selectedFrame) {
+		switch(selectedAttributeType) {
+			case Constants.ATTRIBUTE_FIELD:
+				return createFieldAttribute(selectedFrame);
+			case Constants.ATTRIBUTE_CONSTRUCTOR:
+				return createConstructorAttribute(selectedFrame);
+			case Constants.ATTRIBUTE_METHOD:
+				return createMethodAttribute(selectedFrame);
+			default:
+				break;
+		}
+		return null;
+	}
+
+	private UMLAttribute createMethodAttribute(UMLClassFrame selectedFrame) {
+		Visibility vis = showInputVisibilityDialog(selectedFrame);
+		if (vis == null)
+			return null;
+
+		String methodName = JOptionPane.showInputDialog(selectedFrame, "Enter name for method");
+
+		if (methodName == null || methodName.length() == 0)
+			return null;
+
+		String args = JOptionPane.showInputDialog(selectedFrame, "Enter args (e.g. \"String, String, int\")");
+
+		if (args == null || args.length() == 0)
+			return null;
+
+		String type = JOptionPane.showInputDialog(selectedFrame, "Enter return type");
+
+		if (type == null || type.length() == 0)
+			return null;
+
+		return UMLAttributeFactory.createMethodAttribute(vis, methodName, args, type);
+	}
+
+	private UMLAttribute createConstructorAttribute(UMLClassFrame selectedFrame) {
+		Visibility vis = showInputVisibilityDialog(selectedFrame);
+		if (vis == null)
+			return null;
+
+		String constructorName = selectedFrame.getName();
+
+		String args = JOptionPane.showInputDialog(selectedFrame, "Enter args (e.g. \"String, String, int\")");
+		if (args == null)
+			return null;
+
+		return UMLAttributeFactory.createConstructorAttribute(vis, constructorName, args);
+
+	}
+
+	private Visibility showInputVisibilityDialog(UMLClassFrame selectedFrame) {
+		Visibility vis = (Visibility) JOptionPane.showInputDialog(
+				selectedFrame,
+				"Please choose the visibility for the Constructor",
+				"Please choose visibility",
+				JOptionPane.PLAIN_MESSAGE,
+				null,
+				Visibility.getSymbols().toArray(),
+				null);
+		return vis;
+	}
+
+	private UMLAttribute createFieldAttribute(UMLClassFrame selectedFrame) {
+		Visibility vis = showInputVisibilityDialog(selectedFrame);
+		if (vis == null)
+			return null;
+
+		String fieldName = JOptionPane.showInputDialog(selectedFrame, "Enter field name");
+		if (fieldName == null || fieldName.length() == 0)
+			return null;
+
+		String typeName = JOptionPane.showInputDialog(selectedFrame, "Enter type");
+		if (typeName == null || typeName.length() == 0)
+			return null;
+
+		return UMLAttributeFactory.createFieldAttribute(vis, fieldName, typeName);
+	}
+
+	private void newUMLClass() {
         String classTitle = JOptionPane.showInputDialog("Input Class Name");
         if (classTitle == null || classTitle.isEmpty())
             return;

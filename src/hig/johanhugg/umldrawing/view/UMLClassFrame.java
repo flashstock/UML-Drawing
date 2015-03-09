@@ -18,6 +18,7 @@ import java.util.List;
 public class UMLClassFrame extends JInternalFrame {
 	private JPanel parentPanel;
 	private JLabel titleLabel;
+	private String name;
 
 	private UMLClass associatedClass;
     private Dictionary<UMLAttribute, JLabel> attributeDict;
@@ -29,6 +30,7 @@ public class UMLClassFrame extends JInternalFrame {
 		setSize(300, 300);
 		setLocation(100, 100);
 		titleLabel = new JLabel(associatedClass.getName());
+		this.name = associatedClass.getName();
         this.associatedClass = associatedClass;
         this.attributeDict = new Hashtable<>();
 
@@ -89,6 +91,8 @@ public class UMLClassFrame extends JInternalFrame {
     }
 
 
-
-
+	@Override
+	public String getName() {
+		return name;
+	}
 }

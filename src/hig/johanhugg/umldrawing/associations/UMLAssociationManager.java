@@ -23,6 +23,8 @@ public class UMLAssociationManager {
 
 	public List<UMLClass> relatedWith(UMLClass umlClass) {
 		ArrayList<UMLClass> foundRelations = new ArrayList<>();
+        if (associations.size() == 0)
+            return foundRelations;
 		for (Tuple t : associations) {
 			if (t.contains(umlClass)) {
 				if (t.indexOf(umlClass) == 0)

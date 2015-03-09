@@ -18,6 +18,7 @@ public class UMLClassReceiver {
 	public void addUMLClass(JComponent umlClassFrame) {
 		desktopPane.add(umlClassFrame);
 		umlClassFrame.setVisible(true);
+        umlClassFrame.requestFocus();
 	}
 
 	public void removeUMLClass(JComponent umlClassFrame) {

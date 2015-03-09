@@ -40,12 +40,12 @@ public class UMLDesktopPane extends JDesktopPane {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        //drawCoolBackgroundText(g);
+        //drawCoolBackground(g);
         drawAssociations(g);
     }
 
-    private void drawCoolBackgroundText(Graphics g) {
-        g.drawImage(img, (this.getWidth() - img.getWidth(null)) / 2, (this.getHeight() - img.getWidth(null)) / 2, null);
+    private void drawCoolBackground(Graphics g) {
+        g.drawImage(img, (this.getWidth() - img.getWidth(null)) / 2, (this.getHeight() - img.getHeight(null)) / 2, null);
         //TODO: ?
     }
 

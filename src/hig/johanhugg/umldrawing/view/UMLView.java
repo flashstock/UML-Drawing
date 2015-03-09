@@ -127,8 +127,8 @@ public class UMLView extends JFrame {
 
 		this.setJMenuBar(menubar);
 		desktopPane = new UMLDesktopPane(new UMLAssociationManager());
-        desktopPane.setDragMode(JDesktopPane.OUTLINE_DRAG_MODE);
-        desktopPane.setBackground(Color.white);
+        desktopPane.setDragMode(JDesktopPane.LIVE_DRAG_MODE);
+        desktopPane.setBackground(Color.gray);
 
 		setContentPane(desktopPane);
 

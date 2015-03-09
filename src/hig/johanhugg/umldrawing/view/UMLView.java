@@ -87,6 +87,7 @@ public class UMLView extends JFrame {
 		newUMLClass = new JMenuItem("UML Class");
 		newUMLClass.setActionCommand(Constants.ACTION_COMMAND_NEWUMLCLASS);
 		newUMLClass.setMnemonic(KeyEvent.VK_U);
+        newUMLClass.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, Event.CTRL_MASK));
 		newMenu.add(newUMLClass);
 
         undoItem = new JMenuItem("Undo");

@@ -6,6 +6,9 @@ import net.miginfocom.layout.CC;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -24,7 +27,7 @@ public class UMLClassFrame extends JInternalFrame {
     private Dictionary<UMLAttribute, JLabel> attributeDict;
 
 	public UMLClassFrame(UMLClass associatedClass) {
-		super(null, true, false, false, true);
+		super(null, false, false, false, true);
 		setFrameIcon(null);
         setIconifiable(false);
 		setSize(300, 300);
@@ -52,7 +55,16 @@ public class UMLClassFrame extends JInternalFrame {
             }
         });
 
+        this.addInternalFrameListener(new InternalFrameAdapter() {
+            @Override
+            public void internalFrameActivated(InternalFrameEvent e) {
+                super.internalFrameActivated(e);
+                System.out.println("Activate the anchor thingies");
+            }
+        });
+
 		this.add(parentPanel);
+        this.setVisible(true);
 
 	}
 

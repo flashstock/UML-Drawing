@@ -3,13 +3,14 @@ package hig.johanhugg.umldrawing.view;
 import hig.johanhugg.umldrawing.associations.UMLAssociationManager;
 import hig.johanhugg.umldrawing.model.UMLClass;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.lang.reflect.Array;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /**
  * Created by hugg on 26/02/15.
@@ -17,10 +18,16 @@ import java.util.stream.Collectors;
 public class UMLDesktopPane extends JDesktopPane {
 
     private UMLAssociationManager manager;
+    private Image img;
 
     public UMLDesktopPane(UMLAssociationManager manager) {
         super();
         this.manager = manager;
+        try {
+            img = ImageIO.read(new File("UML_logo.jpg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -33,7 +40,13 @@ public class UMLDesktopPane extends JDesktopPane {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        //drawCoolBackgroundText(g);
         drawAssociations(g);
+    }
+
+    private void drawCoolBackgroundText(Graphics g) {
+        g.drawImage(img, (this.getWidth() - img.getWidth(null)) / 2, (this.getHeight() - img.getWidth(null)) / 2, null);
+        //TODO: ?
     }
 
     private void drawAssociations(Graphics g) {

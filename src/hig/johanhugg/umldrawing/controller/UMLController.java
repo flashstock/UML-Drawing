@@ -7,6 +7,7 @@ import hig.johanhugg.umldrawing.commands.Command;
 import hig.johanhugg.umldrawing.commands.UMLCommandFactory;
 import hig.johanhugg.umldrawing.view.UMLClassFrame;
 import hig.johanhugg.umldrawing.view.UMLView;
+import hig.johanhugg.umldrawing.zetcode.Resizable;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -99,7 +100,7 @@ public class UMLController implements MouseListener, ActionListener {
                 "Create Association",
                 JOptionPane.PLAIN_MESSAGE,
                 null,
-                umlClassFrames.stream().filter(x -> !x.equals(selectedFrame)).collect(Collectors.toList()).toArray(),
+                umlClassFrames.stream().filter(x -> !(x == selectedFrame)).collect(Collectors.toList()).toArray(),
                 null
         );
 		String selectedAssociationType = (String) JOptionPane.showInputDialog(
@@ -214,7 +215,7 @@ public class UMLController implements MouseListener, ActionListener {
 	private Visibility showInputVisibilityDialog(UMLClassFrame selectedFrame) {
 		Visibility vis = (Visibility) JOptionPane.showInputDialog(
 				selectedFrame,
-				"Please choose the visibility for the Constructor",
+				"Please choose the visibility for the field",
 				"Please choose visibility",
 				JOptionPane.PLAIN_MESSAGE,
 				null,

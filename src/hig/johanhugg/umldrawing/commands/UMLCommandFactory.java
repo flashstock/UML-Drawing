@@ -4,12 +4,15 @@ import hig.johanhugg.umldrawing.associations.Association;
 import hig.johanhugg.umldrawing.model.UMLAttribute;
 import hig.johanhugg.umldrawing.view.UMLClassFrame;
 import hig.johanhugg.umldrawing.controller.UMLClassReceiver;
+import hig.johanhugg.umldrawing.zetcode.Resizable;
+
+import javax.swing.*;
 
 /**
  * Created by Johan on 2015-03-01.
  */
 public class UMLCommandFactory {
-	public static Command newUMLClassCommand(UMLClassReceiver receiver, UMLClassFrame frame) {
+	public static Command newUMLClassCommand(UMLClassReceiver receiver, JComponent frame) {
 		return new NewUMLClassCommand(receiver, frame);
 	}
 

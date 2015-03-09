@@ -15,12 +15,12 @@ public class UMLClassReceiver {
 		this.desktopPane = desktopPane;
 	}
 
-	public void addUMLClass(UMLClassFrame umlClassFrame) {
+	public void addUMLClass(JComponent umlClassFrame) {
 		desktopPane.add(umlClassFrame);
 		umlClassFrame.setVisible(true);
 	}
 
-	public void removeUMLClass(UMLClassFrame umlClassFrame) {
+	public void removeUMLClass(JComponent umlClassFrame) {
 		desktopPane.remove(umlClassFrame);
         desktopPane.repaint();
 	}

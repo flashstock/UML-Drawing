@@ -53,8 +53,7 @@ public class UMLController implements MouseListener, ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent event) {
         UMLClassFrame selectedFrame = getSelectedUMLClassFrame();
-        if (selectedFrame == null && umlClassFrames.size() != 0)
-            return;
+
 		switch(event.getActionCommand()) {
 
             case Constants.ACTION_COMMAND_NEWUMLCLASS:

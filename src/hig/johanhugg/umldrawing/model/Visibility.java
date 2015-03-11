@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Johan on 2015-03-08.
  */
 public enum Visibility {
-	PRIVATE ("-"), PUBLIC("+");
+	PRIVATE ("-"), PUBLIC("+"), PROTECTED("#"), DERIVED("#"), PACKAGE("~");
 	private String symbol;
 
 	Visibility(String c) {
@@ -27,6 +27,9 @@ public enum Visibility {
 		List<Visibility> tmp = new ArrayList<>();
 		tmp.add(Visibility.PRIVATE);
 		tmp.add(Visibility.PUBLIC);
+		tmp.add(Visibility.PROTECTED);
+		tmp.add(Visibility.DERIVED);
+		tmp.add(Visibility.PACKAGE);
 		return tmp;
 	}
 }

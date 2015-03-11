@@ -3,15 +3,13 @@ package hig.johanhugg.umldrawing.associations;
 import hig.johanhugg.umldrawing.model.Constants;
 
 /**
- * Created by Johan on 2015-03-01.
+ * Created by Johan on 2015-03-11.
  */
-public class RawAssociation extends Association {
-    private String name;
-	private static final String typeName = Constants.ASSOCIATION_RAWASSOCIATION;
-
+public class Generalization extends Association {
+	private static final String type = Constants.ASSOCIATION_GENERALIZATION;
 	@Override
 	public String getType() {
-		return typeName;
+		return type;
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package hig.johanhugg.umldrawing.associations;
 
 import hig.johanhugg.umldrawing.model.UMLClass;
+import org.javatuples.Pair;
 import org.javatuples.Triplet;
 import org.javatuples.Tuple;
 
@@ -21,16 +22,15 @@ public class UMLAssociationManager {
 		associations.add(Triplet.with(first, second, associationType));
 	}
 
-	public List<UMLClass> relatedWith(UMLClass umlClass) {
-		ArrayList<UMLClass> foundRelations = new ArrayList<>();
+	public List<Pair<UMLClass, Association>> relatedWith(UMLClass umlClass) {
+		ArrayList<Pair<UMLClass, Association>> foundRelations = new ArrayList<>();
         if (associations.size() == 0)
             return foundRelations;
 		for (Tuple t : associations) {
 			if (t.contains(umlClass)) {
-				if (t.indexOf(umlClass) == 0)
-					foundRelations.add((UMLClass) t.getValue(1));
-				else
-					foundRelations.add((UMLClass) t.getValue(0));
+				if (t.indexOf(umlClass) == 0) {
+					foundRelations.add(Pair.with((UMLClass) t.getValue(1), (Association) t.getValue(2)));
+				}
 			}
 		}
         if (foundRelations.size() > 0) {

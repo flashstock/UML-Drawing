@@ -55,13 +55,6 @@ public class UMLClassFrame extends JInternalFrame {
             }
         });
 
-        this.addInternalFrameListener(new InternalFrameAdapter() {
-            @Override
-            public void internalFrameActivated(InternalFrameEvent e) {
-                super.internalFrameActivated(e);
-                System.out.println("Activate the anchor thingies");
-            }
-        });
 
 		this.add(parentPanel);
         this.setVisible(true);

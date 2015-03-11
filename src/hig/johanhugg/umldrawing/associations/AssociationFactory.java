@@ -1,5 +1,6 @@
 package hig.johanhugg.umldrawing.associations;
 
+import com.sun.org.apache.bcel.internal.classfile.ConstantNameAndType;
 import hig.johanhugg.umldrawing.model.Constants;
 
 import java.util.ArrayList;
@@ -18,6 +19,9 @@ public class AssociationFactory {
 		List<String> associations = new LinkedList<>();
 
 		associations.add(Constants.ASSOCIATION_RAWASSOCIATION);
+		associations.add(Constants.ASSOCIATION_AGGREGATION);
+		associations.add(Constants.ASSOCIATION_COMPOSITION);
+		associations.add(Constants.ASSOCIATION_GENERALIZATION);
 
         return associations;
     }
@@ -26,11 +30,16 @@ public class AssociationFactory {
 		switch (type) {
 			case Constants.ASSOCIATION_RAWASSOCIATION:
 				return createRawAssociation();
+			case Constants.ASSOCIATION_GENERALIZATION:
+				return createGeneralization();
 			default:
 				return null;
 		}
 	}
 
+	private static Association createGeneralization() {
+		return new Generalization();
+	}
 
 
 }

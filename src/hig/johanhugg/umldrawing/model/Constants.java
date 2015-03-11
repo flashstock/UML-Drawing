@@ -19,6 +19,9 @@ public class Constants {
     Association types
      */
 	public static final String ASSOCIATION_RAWASSOCIATION = "Raw Association";
+	public static final String ASSOCIATION_AGGREGATION = "Aggregation";
+	public static final String ASSOCIATION_COMPOSITION = "Composition";
+	public static final String ASSOCIATION_GENERALIZATION = "Generalization";
 
     /*
     Attribute types
@@ -26,4 +29,6 @@ public class Constants {
 	public static final String ATTRIBUTE_CONSTRUCTOR = "Constructor";
 	public static final String ATTRIBUTE_METHOD = "Method";
 	public static final String ATTRIBUTE_FIELD = "Field";
+
+
 }

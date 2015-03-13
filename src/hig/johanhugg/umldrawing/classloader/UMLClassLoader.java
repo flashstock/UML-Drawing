@@ -7,6 +7,7 @@ import hig.johanhugg.umldrawing.model.Visibility;
 
 import java.lang.reflect.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -97,41 +98,12 @@ public class UMLClassLoader {
 
 	@Override
 	public String toString() {
-		String out = "";
-		if (loadedClass == null)
-			return "No class loaded";
+		List<UMLAttribute> allAttributes = new LinkedList<>();
+        allAttributes.addAll(getFields());
+        allAttributes.addAll(getConstructors());
+        allAttributes.addAll(getMethods());
 
-		out += "Class name: \n";
-		out += loadedClass.getName() + "\n";
-
-		out += "Methods: \n";
-		Method[] methods = loadedClass.getDeclaredMethods();
-		for (int i = 0; i < methods.length; i++) {
-			Type[] typeParameters = methods[i].getGenericParameterTypes();
-			ArrayList<String> typeNames = new ArrayList<>();
-
-			for (int n = 0; n < typeParameters.length; n++)
-				typeNames.add(typeParameters[n].getTypeName());
-
-			Class<?> returnType = methods[i].getReturnType();
-
-			System.out.format("%s %s (%s) : %s%n", Modifier.toString(methods[i].getModifiers()),
-					methods[i].getName(), typeNames.stream().map(Object::toString).collect(Collectors.joining(" ")),
-					returnType.getName());
-
-
-
-		}
-
-		out += "Attributes: \n";
-		Field[] attributes = loadedClass.getFields();
-		for (int i = 0; i < attributes.length; i++) {
-			out += attributes[i].toGenericString() + "\n";
-		}
-
-
-
-		return out;
+        return allAttributes.stream().map(Object::toString).collect(Collectors.joining("\n"));
 	}
 
 }

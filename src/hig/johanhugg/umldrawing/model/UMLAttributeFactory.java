@@ -23,7 +23,7 @@ public class UMLAttributeFactory {
 		return tmp;
 	}
 
-	public static UMLAttribute createMethodAttribute(Visibility vis, String methodName, String args, String type) {
-		return new MethodAttribute(vis, methodName, args, type);
+	public static UMLAttribute createMethodAttribute(Visibility vis, String methodName, String args, String returnType) {
+		return new MethodAttribute(vis, methodName, args, returnType);
 	}
 }

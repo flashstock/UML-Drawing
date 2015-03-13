@@ -92,7 +92,7 @@ public class UMLDesktopPane extends JDesktopPane {
 		yPoints[ 2 ] = (int)( baseY - th * vecLeft[1] );
 
 		g.drawLine( x, y, (int)baseX, (int)baseY ) ;
-		g.fillPolygon( xPoints, yPoints, 3 ) ;
+		g.drawPolygon(xPoints, yPoints, 3 );
 	}
 
     private void drawCoolBackground() {

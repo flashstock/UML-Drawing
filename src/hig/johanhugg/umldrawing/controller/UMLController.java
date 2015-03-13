@@ -2,6 +2,7 @@ package hig.johanhugg.umldrawing.controller;
 
 import hig.johanhugg.umldrawing.associations.Association;
 import hig.johanhugg.umldrawing.associations.AssociationFactory;
+import hig.johanhugg.umldrawing.classloader.UMLClassLoader;
 import hig.johanhugg.umldrawing.model.*;
 import hig.johanhugg.umldrawing.commands.Command;
 import hig.johanhugg.umldrawing.commands.UMLCommandFactory;
@@ -10,10 +11,7 @@ import hig.johanhugg.umldrawing.view.UMLView;
 import hig.johanhugg.umldrawing.zetcode.Resizable;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,6 +34,11 @@ public class UMLController implements MouseListener, ActionListener {
         this.undoRedoStack = new UndoRedoStack();
 		this.umlClassReceiver = new UMLClassReceiver(umlView.getDesktopPane());
 
+		UMLClassFrame testFrame = new UMLClassFrame(new UMLClassLoader("hig.johanhugg.umldrawing.testclasses.Main").createUMLClassFromLoadedClass());
+		umlClassFrames.add(testFrame);
+		Command umlClassCommand = UMLCommandFactory.newUMLClassCommand(umlClassReceiver, testFrame);
+		undoRedoStack.redo(umlClassCommand);
+
 		addActionListeners(this);
 	}
 
@@ -50,39 +53,27 @@ public class UMLController implements MouseListener, ActionListener {
 	}
 
 
+
 	@Override
 	public void actionPerformed(ActionEvent event) {
         UMLClassFrame selectedFrame = getSelectedUMLClassFrame();
-
-		switch(event.getActionCommand()) {
-
-            case Constants.ACTION_COMMAND_NEWUMLCLASS:
-                newUMLClass();
-				break;
-            case Constants.ACTION_COMMAND_UNDO:
-                System.out.println("Undo");
-                undoRedoStack.undo();
-                break;
-            case Constants.ACTION_COMMAND_REDO:
-                System.out.println("Redo");
-                undoRedoStack.redo();
-                break;
-            case Constants.ACTION_COMMAND_ADDATTRIBUTE:
-                addAttribute(selectedFrame);
-                break;
-            case Constants.ACTION_COMMAND_REMOVEATTRIBUTE:
-                removeAttribute(selectedFrame);
-                break;
-            case Constants.ACTION_COMMAND_NEWASSOCIATION:
-                createAssociation(selectedFrame);
-                break;
-			case Constants.ACTION_COMMAND_REMOVECLASS:
+		String ac = event.getActionCommand();
+		if (selectedFrame != null) {
+			if (ac.equals(Constants.ACTION_COMMAND_ADDATTRIBUTE))
+				addAttribute(selectedFrame);
+			if (ac.equals(Constants.ACTION_COMMAND_REMOVEATTRIBUTE))
+				removeAttribute(selectedFrame);
+			if (ac.equals(Constants.ACTION_COMMAND_NEWASSOCIATION))
+				createAssociation(selectedFrame);
+			if (ac.equals(Constants.ACTION_COMMAND_REMOVECLASS))
 				removeClass(selectedFrame);
-				break;
-			default:
-				System.out.println("Unknown Action");
-				break;
-
+		}  else {
+			if (ac.equals(Constants.ACTION_COMMAND_NEWUMLCLASS))
+				newUMLClass();
+			if (ac.equals(Constants.ACTION_COMMAND_UNDO))
+				undoRedoStack.undo();
+			if (ac.equals(Constants.ACTION_COMMAND_REDO))
+				undoRedoStack.redo();
 		}
 	}
 

@@ -1,5 +1,6 @@
 package hig.johanhugg.umldrawing.model;
 
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,5 +32,15 @@ public enum Visibility {
 		tmp.add(Visibility.DERIVED);
 		tmp.add(Visibility.PACKAGE);
 		return tmp;
+	}
+
+	public static Visibility getVisibilityFromModifier(int mod) {
+		if ((mod & Modifier.PUBLIC) == Modifier.PUBLIC)
+			return Visibility.PUBLIC;
+		if ((mod & Modifier.PRIVATE) == Modifier.PRIVATE)
+			return Visibility.PRIVATE;
+		if ((mod & Modifier.PROTECTED) == Modifier.PROTECTED)
+			return Visibility.PROTECTED;
+		return null;
 	}
 }

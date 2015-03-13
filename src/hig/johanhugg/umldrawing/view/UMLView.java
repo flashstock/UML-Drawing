@@ -2,7 +2,9 @@ package hig.johanhugg.umldrawing.view;
 
 import hig.johanhugg.umldrawing.associations.RawAssociation;
 import hig.johanhugg.umldrawing.associations.UMLAssociationManager;
+import hig.johanhugg.umldrawing.classloader.UMLClassLoader;
 import hig.johanhugg.umldrawing.model.Constants;
+import hig.johanhugg.umldrawing.model.UMLAttribute;
 import hig.johanhugg.umldrawing.model.UMLClass;
 
 import javax.swing.*;
@@ -73,6 +75,12 @@ public class UMLView extends JFrame {
             // handle exception
         }
 
+		UMLClassLoader loader = new UMLClassLoader();
+		loader.loadClass("hig.johanhugg.umldrawing.testclasses.Main");
+
+		loader.getMethods().forEach(System.out::println);
+		loader.getFields().forEach(System.out::println);
+		loader.getConstructors().forEach(System.out::println);
 
         menubar = new JMenuBar();
 
@@ -124,6 +132,8 @@ public class UMLView extends JFrame {
 		removeClassItem.setMnemonic(KeyEvent.VK_C);
 		removeClassItem.setActionCommand(Constants.ACTION_COMMAND_REMOVECLASS);
 		editMenu.add(removeClassItem);
+
+
 
 		this.setJMenuBar(menubar);
 		desktopPane = new UMLDesktopPane(new UMLAssociationManager());

@@ -22,6 +22,7 @@ public class UMLClassFrame extends JInternalFrame {
 	private JPanel parentPanel;
 	private JLabel titleLabel;
 	private String name;
+	private Font fieldFont;
 
 	private UMLClass associatedClass;
     private Dictionary<UMLAttribute, JLabel> attributeDict;
@@ -30,6 +31,7 @@ public class UMLClassFrame extends JInternalFrame {
 		super(null, false, false, false, true);
 		setFrameIcon(null);
         setIconifiable(false);
+		fieldFont = new Font("Monospaced", Font.PLAIN, 12);
 		setSize(300, 300);
 		setLocation(100, 100);
 		titleLabel = new JLabel(associatedClass.getName());
@@ -46,25 +48,38 @@ public class UMLClassFrame extends JInternalFrame {
 		parentPanel.add(titleLabel, componentConstraints);
 
         this.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentMoved(ComponentEvent e) {
-                super.componentMoved(e);
-                getDesktopPane().repaint();
-                //We need this so that the desktoppane repaints itself everytime the component is moved, otherwise lines will look weird.
-                //This also saves performance since we only repaint when the component is moved, not all the time the line is drawn.
-            }
-        });
+			@Override
+			public void componentMoved(ComponentEvent e) {
+				super.componentMoved(e);
+				getDesktopPane().repaint();
+				//We need this so that the desktoppane repaints itself everytime the component is moved, otherwise lines will look weird.
+				//This also saves performance since we only repaint when the component is moved, not all the time the line is drawn.
+			}
+		});
 
+		if (associatedClass.getAttributes().size() > 0)
+			loadExistingAttributes();
 
 		this.add(parentPanel);
         this.setVisible(true);
 
 	}
 
+	private void loadExistingAttributes() {
+		for (UMLAttribute attribute : associatedClass.getAttributes()) {
+			JLabel addedAttr;
+			this.attributeDict.put(attribute, addedAttr = new JLabel(attribute.toString()));
+			addedAttr.setFont(fieldFont);
+			parentPanel.add(addedAttr, "wrap");
+		}
+		update();
+	}
+
     public void addAttribute(UMLAttribute attribute) {
         JLabel addedAttr;
         this.attributeDict.put(attribute, addedAttr = new JLabel(attribute.toString()));
         parentPanel.add(addedAttr, "wrap");
+		addedAttr.setFont(fieldFont);
         associatedClass.addAttribute(attribute);
         update();
     }

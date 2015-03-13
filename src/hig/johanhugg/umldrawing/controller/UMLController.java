@@ -36,7 +36,7 @@ public class UMLController implements ActionListener {
         this.undoRedoStack = new UndoRedoStack();
 		this.umlClassReceiver = new UMLClassReceiver(umlView.getDesktopPane());
 
-		UMLClassFrame testFrame = new UMLClassFrame(new UMLClassLoader("hig.johanhugg.umldrawing.testclasses.Main").createUMLClassFromLoadedClass());
+		UMLClassFrame testFrame = new UMLClassFrame(new UMLClassLoader("hig.johanhugg.umldrawing.controller.UMLController").createUMLClassFromLoadedClass());
 		umlClassFrames.add(testFrame);
 		Command umlClassCommand = UMLCommandFactory.newUMLClassCommand(umlClassReceiver, testFrame);
 		undoRedoStack.redo(umlClassCommand);

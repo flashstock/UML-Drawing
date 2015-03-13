@@ -44,12 +44,12 @@ public class UMLClassLoader {
         Arrays.stream(loadedClass.getDeclaredMethods()).forEach(method -> {
             ArrayList<String> typeNames = new ArrayList<>();
 
-            Arrays.stream(method.getGenericParameterTypes()).forEach(type -> typeNames.add(type.getTypeName()));
+            Arrays.stream(method.getParameterTypes()).forEach(type -> typeNames.add(type.getSimpleName()));
 
             Class<?> returnType = method.getReturnType();
 
             umlAttributes.add(UMLAttributeFactory.createMethodAttribute(Visibility.getVisibilityFromModifier(method.getModifiers()),
-                    method.getName(), typeNames.stream().map(Object::toString).collect(Collectors.joining(" ")), returnType.getName()));
+                    method.getName(), typeNames.stream().map(Object::toString).collect(Collectors.joining(" ")), returnType.getSimpleName()));
         });
 
 		return umlAttributes;
@@ -77,10 +77,10 @@ public class UMLClassLoader {
 		ArrayList<UMLAttribute> umlConstructors = new ArrayList<>();
 
         Arrays.stream(loadedClass.getConstructors()).forEach(cons -> {
-            Type[] typeParameters = cons.getGenericParameterTypes();
+            Class[] typeParameters = cons.getParameterTypes();
             ArrayList<String> typeNames = new ArrayList<>();
 
-            Arrays.stream(typeParameters).forEach(x -> typeNames.add(x.getTypeName()));
+            Arrays.stream(typeParameters).forEach(x -> typeNames.add(x.getSimpleName()));
 
             umlConstructors.add(UMLAttributeFactory.createConstructorAttribute(Visibility.getVisibilityFromModifier(cons.getModifiers()),
                     loadedClass.getSimpleName(), typeNames.stream().map(Object::toString).collect(Collectors.joining(" "))));

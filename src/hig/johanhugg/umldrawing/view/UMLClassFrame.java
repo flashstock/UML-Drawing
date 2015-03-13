@@ -30,7 +30,6 @@ public class UMLClassFrame extends JInternalFrame {
 		setFrameIcon(null);
         setIconifiable(false);
 		fieldFont = new Font("Monospaced", Font.PLAIN, 12);
-		setSize(300, 300);
 		setLocation(100, 100);
 		titleLabel = new JLabel(associatedClass.getName());
 		this.name = associatedClass.getName();
@@ -59,6 +58,7 @@ public class UMLClassFrame extends JInternalFrame {
 			loadExistingAttributes();
 
 		this.add(parentPanel);
+        this.pack();
         this.setVisible(true);
 
 	}

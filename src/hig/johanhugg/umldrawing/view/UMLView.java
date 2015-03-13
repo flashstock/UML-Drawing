@@ -79,7 +79,7 @@ public class UMLView extends JFrame {
 		loader.getFields().forEach(System.out::println);
 		loader.getConstructors().forEach(System.out::println);
 
-        System.out.println(loader);
+
 
         menubar = new JMenuBar();
 

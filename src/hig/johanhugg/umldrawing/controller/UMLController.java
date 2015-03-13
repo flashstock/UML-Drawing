@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Johan on 2015-02-25.
  */
-public class UMLController implements MouseListener, ActionListener {
+public class UMLController implements ActionListener {
 
 	private final UMLView umlView;
 	private final UMLModel umlModel;
@@ -53,8 +53,6 @@ public class UMLController implements MouseListener, ActionListener {
         umlView.getAddAssociationItem().addActionListener(actionListener);
 		umlView.getRemoveClassItem().addActionListener(actionListener);
 	}
-
-
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
@@ -246,28 +244,4 @@ public class UMLController implements MouseListener, ActionListener {
         return (UMLClassFrame) umlView.getDesktopPane().getSelectedFrame();
     }
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-
-	}
 }

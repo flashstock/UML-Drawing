@@ -35,9 +35,9 @@ public class UMLClassLoader {
 		}
 	}
 
-	public List<UMLAttribute> getMethods() {
+	public List<UMLAttribute> getMethods() throws ClassNotLoadedException {
 		if (loadedClass == null)
-			return null;
+			throw new ClassNotLoadedException();
 
 		ArrayList<UMLAttribute> umlAttributes = new ArrayList<>();
 
@@ -55,9 +55,9 @@ public class UMLClassLoader {
 		return umlAttributes;
 	}
 
-	public List<UMLAttribute> getFields() {
+	public List<UMLAttribute> getFields() throws ClassNotLoadedException {
 		if (loadedClass == null)
-			return null;
+            throw new ClassNotLoadedException();
 
 		ArrayList<UMLAttribute> umlFields = new ArrayList<>();
 
@@ -70,9 +70,9 @@ public class UMLClassLoader {
 
 	}
 
-	public List<UMLAttribute> getConstructors() {
+	public List<UMLAttribute> getConstructors() throws ClassNotLoadedException {
 		if (loadedClass == null)
-			return null;
+            throw new ClassNotLoadedException();
 
 		ArrayList<UMLAttribute> umlConstructors = new ArrayList<>();
 
@@ -89,9 +89,9 @@ public class UMLClassLoader {
 		return umlConstructors;
 	}
 
-	public UMLClass createUMLClassFromLoadedClass() {
+	public UMLClass createUMLClassFromLoadedClass() throws ClassNotLoadedException {
 		if (loadedClass == null)
-			return null;
+            throw new ClassNotLoadedException();
 		UMLClass generatedClass = new UMLClass(loadedClass.getSimpleName());
 
         getConstructors().forEach(x -> generatedClass.addAttribute(x));

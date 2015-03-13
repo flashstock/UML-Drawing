@@ -61,7 +61,7 @@ public class UMLClassLoader {
 		Field[] attributes = loadedClass.getDeclaredFields();
 		for (int i = 0; i < attributes.length; i++) {
 			umlFields.add(UMLAttributeFactory.createFieldAttribute(Visibility.getVisibilityFromModifier(attributes[i].getModifiers()),
-					attributes[i].getName(), attributes[i].getType().toString()));
+					attributes[i].getName(), attributes[i].getType().getSimpleName()));
 		}
 		return umlFields;
 

@@ -1,10 +1,9 @@
 package hig.johanhugg.umldrawing.commands;
 
 import hig.johanhugg.umldrawing.associations.Association;
+import hig.johanhugg.umldrawing.controller.UMLClassReceiver;
 import hig.johanhugg.umldrawing.model.UMLAttribute;
 import hig.johanhugg.umldrawing.view.UMLClassFrame;
-import hig.johanhugg.umldrawing.controller.UMLClassReceiver;
-import hig.johanhugg.umldrawing.zetcode.Resizable;
 
 import javax.swing.*;
 

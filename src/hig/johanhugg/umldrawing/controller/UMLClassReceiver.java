@@ -1,9 +1,6 @@
 package hig.johanhugg.umldrawing.controller;
 
-import hig.johanhugg.umldrawing.view.UMLClassFrame;
-
 import javax.swing.*;
-import java.util.LinkedList;
 
 /**
  * Created by Johan on 2015-02-25.

@@ -6,13 +6,11 @@ import net.miginfocom.layout.CC;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import javax.swing.event.InternalFrameAdapter;
-import javax.swing.event.InternalFrameEvent;
-import javax.swing.event.InternalFrameListener;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.util.*;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.List;
 
 /**

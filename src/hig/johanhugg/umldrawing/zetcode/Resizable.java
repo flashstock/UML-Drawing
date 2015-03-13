@@ -1,15 +1,11 @@
 package hig.johanhugg.umldrawing.zetcode;
 
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.MouseEvent;
-import javax.swing.JComponent;
+import javax.swing.*;
 import javax.swing.event.MouseInputAdapter;
 import javax.swing.event.MouseInputListener;
+import java.awt.*;
+import java.awt.event.MouseEvent;
 
 
 public class Resizable extends JComponent {

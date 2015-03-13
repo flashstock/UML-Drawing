@@ -5,8 +5,6 @@ import hig.johanhugg.umldrawing.associations.UMLAssociationManager;
 import hig.johanhugg.umldrawing.view.UMLClassFrame;
 import hig.johanhugg.umldrawing.view.UMLDesktopPane;
 
-import javax.swing.*;
-
 /**
  * Created by hugg on 07/03/15.
  */

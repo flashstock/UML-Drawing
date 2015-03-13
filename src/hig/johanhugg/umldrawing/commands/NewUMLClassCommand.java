@@ -1,6 +1,5 @@
 package hig.johanhugg.umldrawing.commands;
 
-import hig.johanhugg.umldrawing.view.UMLClassFrame;
 import hig.johanhugg.umldrawing.controller.UMLClassReceiver;
 
 import javax.swing.*;

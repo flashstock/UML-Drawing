@@ -1,9 +1,7 @@
 package hig.johanhugg.umldrawing.associations;
 
-import com.sun.org.apache.bcel.internal.classfile.ConstantNameAndType;
 import hig.johanhugg.umldrawing.model.Constants;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 

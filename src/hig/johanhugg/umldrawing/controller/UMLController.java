@@ -28,14 +28,12 @@ import java.util.stream.Collectors;
 public class UMLController implements ActionListener {
 
 	private final UMLView umlView;
-	private final UMLModel umlModel;
 	private UMLClassReceiver umlClassReceiver;
     private LinkedList<UMLClassFrame> umlClassFrames;
     private UndoRedoStack undoRedoStack;
 
-	public UMLController(UMLView umlView, UMLModel umlModel) {
+	public UMLController(UMLView umlView) {
 		this.umlView = umlView;
-		this.umlModel = umlModel;
         this.umlClassFrames = new LinkedList<>();
         this.undoRedoStack = new UndoRedoStack();
 		this.umlClassReceiver = new UMLClassReceiver(umlView.getDesktopPane());

@@ -27,6 +27,10 @@ public class UMLCommandFactory {
         return new CreateAssociationCommand(selectedFrame, otherFrame, type);
     }
 
+    public static Command editAttribute(UMLClassFrame frame, UMLAttribute toEdit, UMLAttribute newValue) {
+        return new EditAttributeCommand(frame, toEdit, newValue);
+    }
+
 	public static Command removeClass(UMLClassFrame selectedFrame) {
 		return new RemoveClassCommand(selectedFrame);
 	}

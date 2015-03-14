@@ -75,14 +75,14 @@ public class UMLController implements ActionListener {
                 editAttribute(selectedFrame);
             if (ac.equals(Constants.ACTION_COMMAND_EDITCLASSNAME))
                 editClassName(selectedFrame);
-		}  else {
-			if (ac.equals(Constants.ACTION_COMMAND_NEWUMLCLASS))
-				newUMLClass();
-			if (ac.equals(Constants.ACTION_COMMAND_UNDO))
-				undoRedoStack.undo();
-			if (ac.equals(Constants.ACTION_COMMAND_REDO))
-				undoRedoStack.redo();
 		}
+
+        if (ac.equals(Constants.ACTION_COMMAND_NEWUMLCLASS))
+            newUMLClass();
+        if (ac.equals(Constants.ACTION_COMMAND_UNDO))
+            undoRedoStack.undo();
+        if (ac.equals(Constants.ACTION_COMMAND_REDO))
+            undoRedoStack.redo();
 	}
 
     private void editClassName(UMLClassFrame selectedFrame) {
@@ -109,20 +109,19 @@ public class UMLController implements ActionListener {
             case Constants.ATTRIBUTE_CONSTRUCTOR:
                 createdAttrib = createConstructorAttribute(selectedFrame);
                 if (createdAttrib != null)
-                    attributes.set(attributes.indexOf(selectedAttribute), createdAttrib);
+                    undoRedoStack.redo(UMLCommandFactory.editAttribute(selectedFrame, selectedAttribute, createdAttrib));
                 break;
             case Constants.ATTRIBUTE_FIELD:
                 createdAttrib = createFieldAttribute(selectedFrame);
                 if (createdAttrib != null)
-                    attributes.set(attributes.indexOf(selectedAttribute), createdAttrib);
-                break;
+                    undoRedoStack.redo(UMLCommandFactory.editAttribute(selectedFrame, selectedAttribute, createdAttrib));
+                    break;
             case Constants.ATTRIBUTE_METHOD:
                 createdAttrib = createMethodAttribute(selectedFrame);
                 if (createdAttrib != null)
-                    attributes.set(attributes.indexOf(selectedAttribute), createdAttrib);
+                    undoRedoStack.redo(UMLCommandFactory.editAttribute(selectedFrame, selectedAttribute, createdAttrib));
                 break;
         }
-        selectedFrame.updateFields();
 
     }
 

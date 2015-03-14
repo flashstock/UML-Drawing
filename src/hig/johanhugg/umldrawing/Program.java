@@ -11,7 +11,6 @@ import javax.swing.*;
  */
 public class Program {
 	public static void main(String[] args) {
-		System.out.println("Hello");
 		SwingUtilities.invokeLater(() -> new UMLController(new UMLView(), new UMLModel()));
 	}
 }

@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.Dictionary;
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -87,6 +88,21 @@ public class UMLClassFrame extends JInternalFrame {
         parentPanel.remove(associatedLabel);
         attributeDict.remove(attribute);
         associatedClass.removeAttribute(attribute);
+        update();
+    }
+
+    public void updateFields() {
+        Enumeration<JLabel> elements = attributeDict.elements();
+        while (elements.hasMoreElements())
+            parentPanel.remove(elements.nextElement());
+
+        this.attributeDict = new Hashtable<>();
+        associatedClass.getAttributes().stream().forEach(x -> {
+            JLabel addedAttr;
+            attributeDict.put(x, addedAttr = new JLabel(x.toString()));
+            addedAttr.setFont(fieldFont);
+            parentPanel.add(addedAttr, "wrap");
+        });
         update();
     }
 

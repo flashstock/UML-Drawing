@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,6 +53,7 @@ public class UMLController implements ActionListener {
         umlView.getRemoveAttributeItem().addActionListener(actionListener);
         umlView.getAddAssociationItem().addActionListener(actionListener);
 		umlView.getRemoveClassItem().addActionListener(actionListener);
+        umlView.getEditAttributeItem().addActionListener(actionListener);
 	}
 
 	@Override
@@ -67,6 +69,8 @@ public class UMLController implements ActionListener {
 				createAssociation(selectedFrame);
 			if (ac.equals(Constants.ACTION_COMMAND_REMOVECLASS))
 				removeClass(selectedFrame);
+            if (ac.equals(Constants.ACTION_COMMAND_EDITATTRIBUTE))
+                editAttribute(selectedFrame);
 		}  else {
 			if (ac.equals(Constants.ACTION_COMMAND_NEWUMLCLASS))
 				newUMLClass();
@@ -77,7 +81,33 @@ public class UMLController implements ActionListener {
 		}
 	}
 
-	private void removeClass(UMLClassFrame selectedFrame) {
+    private void editAttribute(UMLClassFrame selectedFrame) {
+        List<UMLAttribute> attributes = selectedFrame.getAttributes();
+        UMLAttribute selectedAttribute = (UMLAttribute) JOptionPane.showInputDialog(
+                selectedFrame,
+                "Please choose the attribute you want to edit",
+                "Edit attribute",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                attributes.toArray(),
+                null
+        );
+        switch (selectedAttribute.getIdentifier()) {
+            case Constants.ATTRIBUTE_CONSTRUCTOR:
+                attributes.set(attributes.indexOf(selectedAttribute), createConstructorAttribute(selectedFrame));
+                break;
+            case Constants.ATTRIBUTE_FIELD:
+                attributes.set(attributes.indexOf(selectedAttribute), createFieldAttribute(selectedFrame));
+                break;
+            case Constants.ATTRIBUTE_METHOD:
+                attributes.set(attributes.indexOf(selectedAttribute), createMethodAttribute(selectedFrame));
+                break;
+        }
+        selectedFrame.updateFields();
+
+    }
+
+    private void removeClass(UMLClassFrame selectedFrame) {
 		Command removeClassCommand = UMLCommandFactory.removeClass(selectedFrame);
 		undoRedoStack.redo(removeClassCommand);
 

@@ -1,5 +1,6 @@
 package hig.johanhugg.umldrawing.controller;
 
+import com.sun.tools.internal.jxc.ap.Const;
 import hig.johanhugg.umldrawing.associations.Association;
 import hig.johanhugg.umldrawing.associations.AssociationFactory;
 import hig.johanhugg.umldrawing.classloader.UMLClassLoader;
@@ -54,6 +55,7 @@ public class UMLController implements ActionListener {
         umlView.getAddAssociationItem().addActionListener(actionListener);
 		umlView.getRemoveClassItem().addActionListener(actionListener);
         umlView.getEditAttributeItem().addActionListener(actionListener);
+        umlView.getEditClassName().addActionListener(actionListener);
 	}
 
 	@Override
@@ -71,6 +73,8 @@ public class UMLController implements ActionListener {
 				removeClass(selectedFrame);
             if (ac.equals(Constants.ACTION_COMMAND_EDITATTRIBUTE))
                 editAttribute(selectedFrame);
+            if (ac.equals(Constants.ACTION_COMMAND_EDITCLASSNAME))
+                editClassName(selectedFrame);
 		}  else {
 			if (ac.equals(Constants.ACTION_COMMAND_NEWUMLCLASS))
 				newUMLClass();
@@ -80,6 +84,14 @@ public class UMLController implements ActionListener {
 				undoRedoStack.redo();
 		}
 	}
+
+    private void editClassName(UMLClassFrame selectedFrame) {
+        String newName = JOptionPane.showInputDialog("Input the new name for the class");
+        if (newName == null || newName.length() == 0)
+            return;
+
+        selectedFrame.setUMLClassName(newName);
+    }
 
     private void editAttribute(UMLClassFrame selectedFrame) {
         List<UMLAttribute> attributes = selectedFrame.getAttributes();

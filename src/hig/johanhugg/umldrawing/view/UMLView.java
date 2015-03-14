@@ -20,6 +20,7 @@ public class UMLView extends JFrame {
     private final JMenuItem addAssociationItem;
 	private final JMenuItem removeClassItem;
     private final JMenuItem editAttributeItem;
+    private final JMenuItem editClassName;
     private JMenuBar menubar;
 	private JMenu fileMenu;
 	private JMenu newMenu;
@@ -141,6 +142,10 @@ public class UMLView extends JFrame {
         editAttributeItem.setActionCommand(Constants.ACTION_COMMAND_EDITATTRIBUTE);
         editMenu.add(editAttributeItem);
 
+        editClassName = new JMenuItem("Edit Class Name");
+        editClassName.setActionCommand(Constants.ACTION_COMMAND_EDITCLASSNAME);
+        editMenu.add(editClassName);
+
 
 
 		this.setJMenuBar(menubar);
@@ -175,5 +180,9 @@ public class UMLView extends JFrame {
 
     public JMenuItem getRemoveAttributeItem() {
         return removeAttributeItem;
+    }
+
+    public JMenuItem getEditClassName() {
+        return editClassName;
     }
 }

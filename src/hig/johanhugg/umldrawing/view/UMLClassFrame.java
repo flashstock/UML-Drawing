@@ -106,6 +106,11 @@ public class UMLClassFrame extends JInternalFrame {
         update();
     }
 
+    public void setUMLClassName(String name) {
+        associatedClass.setName(name);
+        titleLabel.setText(name);
+    }
+
     public List<UMLAttribute> getAttributes() {
         return associatedClass.getAttributes();
     }

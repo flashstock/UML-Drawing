@@ -30,4 +30,8 @@ public class UMLClass {
     public void removeAttribute(UMLAttribute attribute) {
         umlAttributes.remove(attribute);
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

@@ -15,6 +15,7 @@ public class Constants {
     public static final String ACTION_COMMAND_NEWASSOCIATION = "Create Association";
     public static final String ACTION_COMMAND_REMOVECLASS = "Remove Class";
     public static final String ACTION_COMMAND_EDITATTRIBUTE = "Edit Attribute";
+    public static final String ACTION_COMMAND_EDITCLASSNAME = "Edit Class Name";
 
     /*
     Association types

@@ -130,8 +130,7 @@ public class UMLClassFrame extends JInternalFrame {
     }
 
 
-	@Override
-	public String getName() {
-		return name;
-	}
+	public String getUMLClassName() {
+        return associatedClass.getName();
+    }
 }

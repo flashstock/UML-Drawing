@@ -89,8 +89,7 @@ public class UMLController implements ActionListener {
         String newName = JOptionPane.showInputDialog("Input the new name for the class");
         if (newName == null || newName.length() == 0)
             return;
-
-        selectedFrame.setUMLClassName(newName);
+        undoRedoStack.redo(UMLCommandFactory.editClassName(selectedFrame, newName));
     }
 
     private void editAttribute(UMLClassFrame selectedFrame) {

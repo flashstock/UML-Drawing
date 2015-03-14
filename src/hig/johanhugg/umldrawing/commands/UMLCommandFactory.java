@@ -34,4 +34,8 @@ public class UMLCommandFactory {
 	public static Command removeClass(UMLClassFrame selectedFrame) {
 		return new RemoveClassCommand(selectedFrame);
 	}
+
+    public static EditClassNameCommand editClassName(UMLClassFrame selectedFrame, String newName) {
+        return new EditClassNameCommand(selectedFrame, newName);
+    }
 }

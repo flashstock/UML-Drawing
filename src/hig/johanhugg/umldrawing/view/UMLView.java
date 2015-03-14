@@ -106,6 +106,7 @@ public class UMLView extends JFrame {
 
 		editMenu = new JMenu("Edit");
 		editMenu.setMnemonic(KeyEvent.VK_E);
+        editMenu.setEnabled(false);
 		menubar.add(editMenu);
 
 		addAttributeItem = new JMenuItem("Add Attribute");
@@ -145,7 +146,6 @@ public class UMLView extends JFrame {
         desktopPane.setBackground(Color.gray);
 
 		setContentPane(desktopPane);
-
 
 		setBounds(0, 0, 1024, 768);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

@@ -11,6 +11,8 @@ import hig.johanhugg.umldrawing.view.UMLClassFrame;
 import hig.johanhugg.umldrawing.view.UMLView;
 
 import javax.swing.*;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -38,10 +40,10 @@ public class UMLController implements ActionListener {
         this.undoRedoStack = new UndoRedoStack();
 		this.umlClassReceiver = new UMLClassReceiver(umlView.getDesktopPane());
 
-		UMLClassFrame testFrame = new UMLClassFrame(new UMLClassLoader("hig.johanhugg.umldrawing.controller.UMLController").createUMLClassFromLoadedClass());
-		umlClassFrames.add(testFrame);
-		Command umlClassCommand = UMLCommandFactory.newUMLClassCommand(umlClassReceiver, testFrame);
-		undoRedoStack.redo(umlClassCommand);
+//		UMLClassFrame testFrame = new UMLClassFrame(new UMLClassLoader("hig.johanhugg.umldrawing.controller.UMLController").createUMLClassFromLoadedClass());
+//		umlClassFrames.add(testFrame);
+//		Command umlClassCommand = UMLCommandFactory.newUMLClassCommand(umlClassReceiver, testFrame);
+//		undoRedoStack.redo(umlClassCommand);
 
 		addActionListeners(this);
 	}
@@ -239,7 +241,7 @@ public class UMLController implements ActionListener {
 		if (vis == null)
 			return null;
 
-		String constructorName = selectedFrame.getName();
+		String constructorName = selectedFrame.getUMLClassName();
 
 		String args = JOptionPane.showInputDialog(selectedFrame, "Enter args (e.g. \"String String int\")");
 		if (args == null)
@@ -282,6 +284,19 @@ public class UMLController implements ActionListener {
         if (classTitle == null || classTitle.isEmpty())
             return;
         UMLClassFrame umlClassFrame = new UMLClassFrame(new UMLClass(classTitle));
+        umlClassFrame.addInternalFrameListener(new InternalFrameAdapter() {
+            @Override
+            public void internalFrameActivated(InternalFrameEvent e) {
+                super.internalFrameActivated(e);
+                umlView.getEditMenu().setEnabled(true);
+            }
+
+            @Override
+            public void internalFrameDeactivated(InternalFrameEvent e) {
+                super.internalFrameDeactivated(e);
+                umlView.getEditMenu().setEnabled(false);
+            }
+        });
         umlClassFrames.add(umlClassFrame);
         Command umlClassCommand = UMLCommandFactory.newUMLClassCommand(umlClassReceiver, umlClassFrame);
         undoRedoStack.redo(umlClassCommand);

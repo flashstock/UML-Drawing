@@ -36,6 +36,7 @@ public class UMLClassFrame extends JInternalFrame {
 		this.name = associatedClass.getName();
         this.associatedClass = associatedClass;
         this.attributeDict = new Hashtable<>();
+        setMinimumSize(new Dimension(200, 200));
 
 		this.parentPanel = new JPanel();
 		parentPanel.setBackground(Color.white);
@@ -50,7 +51,7 @@ public class UMLClassFrame extends JInternalFrame {
 			public void componentMoved(ComponentEvent e) {
 				super.componentMoved(e);
 				getDesktopPane().repaint();
-				//We need this so that the desktoppane repaints itself everytime the component is moved, otherwise lines will look weird.
+				//We need this so that the desktoppane repaints itself every time the component is moved, otherwise lines will look weird.
 				//This also saves performance since we only repaint when the component is moved, not all the time the line is drawn.
 			}
 		});

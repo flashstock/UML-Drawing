@@ -1,6 +1,5 @@
 package hig.johanhugg.umldrawing.commands;
 
-import hig.johanhugg.umldrawing.model.Constants;
 import hig.johanhugg.umldrawing.model.UMLAttribute;
 import hig.johanhugg.umldrawing.view.UMLClassFrame;
 

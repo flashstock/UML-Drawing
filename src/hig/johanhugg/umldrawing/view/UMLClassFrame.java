@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.beans.PropertyVetoException;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -61,9 +62,13 @@ public class UMLClassFrame extends JInternalFrame {
 
 		this.add(parentPanel);
         this.pack();
-        this.setVisible(true);
+        try {
+            this.setSelected(true);
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        }
 
-	}
+    }
 
 	private void loadExistingAttributes() {
 		for (UMLAttribute attribute : associatedClass.getAttributes()) {

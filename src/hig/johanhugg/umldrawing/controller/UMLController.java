@@ -104,15 +104,22 @@ public class UMLController implements ActionListener {
                 attributes.toArray(),
                 null
         );
+        UMLAttribute createdAttrib;
         switch (selectedAttribute.getIdentifier()) {
             case Constants.ATTRIBUTE_CONSTRUCTOR:
-                attributes.set(attributes.indexOf(selectedAttribute), createConstructorAttribute(selectedFrame));
+                createdAttrib = createConstructorAttribute(selectedFrame);
+                if (createdAttrib != null)
+                    attributes.set(attributes.indexOf(selectedAttribute), createdAttrib);
                 break;
             case Constants.ATTRIBUTE_FIELD:
-                attributes.set(attributes.indexOf(selectedAttribute), createFieldAttribute(selectedFrame));
+                createdAttrib = createFieldAttribute(selectedFrame);
+                if (createdAttrib != null)
+                    attributes.set(attributes.indexOf(selectedAttribute), createdAttrib);
                 break;
             case Constants.ATTRIBUTE_METHOD:
-                attributes.set(attributes.indexOf(selectedAttribute), createMethodAttribute(selectedFrame));
+                createdAttrib = createMethodAttribute(selectedFrame);
+                if (createdAttrib != null)
+                    attributes.set(attributes.indexOf(selectedAttribute), createdAttrib);
                 break;
         }
         selectedFrame.updateFields();
@@ -216,10 +223,10 @@ public class UMLController implements ActionListener {
 		if (methodName == null || methodName.length() == 0)
 			return null;
 
-		String args = JOptionPane.showInputDialog(selectedFrame, "Enter args (e.g. \"String, String, int\")");
+		String args = JOptionPane.showInputDialog(selectedFrame, "Enter args (e.g. \"String String int\")");
 
-		if (args == null || args.length() == 0)
-			return null;
+		if (args == null)
+            args = "";
 
 		String type = JOptionPane.showInputDialog(selectedFrame, "Enter return type");
 
@@ -236,9 +243,9 @@ public class UMLController implements ActionListener {
 
 		String constructorName = selectedFrame.getName();
 
-		String args = JOptionPane.showInputDialog(selectedFrame, "Enter args (e.g. \"String, String, int\")");
+		String args = JOptionPane.showInputDialog(selectedFrame, "Enter args (e.g. \"String String int\")");
 		if (args == null)
-			return null;
+			args = "";
 
 		return UMLAttributeFactory.createConstructorAttribute(vis, constructorName, args);
 

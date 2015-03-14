@@ -78,15 +78,6 @@ public class UMLView extends JFrame {
             // handle exception
         }
 
-		UMLClassLoader loader = new UMLClassLoader();
-		loader.loadClass("hig.johanhugg.umldrawing.testclasses.Main");
-
-		loader.getMethods().forEach(System.out::println);
-		loader.getFields().forEach(System.out::println);
-		loader.getConstructors().forEach(System.out::println);
-
-
-
         menubar = new JMenuBar();
 
 		fileMenu = new JMenu("File");

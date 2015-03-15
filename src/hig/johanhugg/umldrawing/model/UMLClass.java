@@ -27,6 +27,10 @@ public class UMLClass {
 		umlAttributes.add(attribute);
 	}
 
+	public void addAttribute(UMLAttribute attribute, int pos) {
+		umlAttributes.add(pos, attribute);
+	}
+
     public void removeAttribute(UMLAttribute attribute) {
         umlAttributes.remove(attribute);
     }

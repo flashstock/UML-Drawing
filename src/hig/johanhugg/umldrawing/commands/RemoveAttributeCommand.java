@@ -10,10 +10,12 @@ public class RemoveAttributeCommand implements Command {
 
     private final UMLClassFrame frame;
     private final UMLAttribute attribute;
+	private final int attributePos;
 
     public RemoveAttributeCommand(UMLClassFrame frame, UMLAttribute attribute) {
         this.frame = frame;
         this.attribute = attribute;
+		attributePos = frame.getAssociatedClass().getAttributes().indexOf(attribute);
     }
 
     @Override
@@ -23,6 +25,6 @@ public class RemoveAttributeCommand implements Command {
 
     @Override
     public void undo() {
-        frame.addAttribute(attribute);
+        frame.addAttribute(attribute, attributePos);
     }
 }

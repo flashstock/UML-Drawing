@@ -1,6 +1,5 @@
 package hig.johanhugg.umldrawing.controller;
 
-import com.sun.tools.internal.jxc.ap.Const;
 import hig.johanhugg.umldrawing.associations.Association;
 import hig.johanhugg.umldrawing.associations.AssociationFactory;
 import hig.johanhugg.umldrawing.classloader.UMLClassLoader;

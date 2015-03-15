@@ -37,7 +37,7 @@ public class UMLClassFrame extends JInternalFrame {
 		this.name = associatedClass.getName();
         this.associatedClass = associatedClass;
         this.attributeDict = new Hashtable<>();
-        setMinimumSize(new Dimension(200, 200));
+        setSize(new Dimension(200, 200));
 
 		this.parentPanel = new JPanel();
 		parentPanel.setBackground(Color.white);
@@ -61,7 +61,6 @@ public class UMLClassFrame extends JInternalFrame {
 			loadExistingAttributes();
 
 		this.add(parentPanel);
-        this.pack();
         try {
             this.setSelected(true);
         } catch (PropertyVetoException e) {
@@ -77,24 +76,31 @@ public class UMLClassFrame extends JInternalFrame {
 			addedAttr.setFont(fieldFont);
 			parentPanel.add(addedAttr, "wrap");
 		}
-		update();
+		updateFields();
 	}
 
     public void addAttribute(UMLAttribute attribute) {
-        JLabel addedAttr;
-        this.attributeDict.put(attribute, addedAttr = new JLabel(attribute.toString()));
-        parentPanel.add(addedAttr, "wrap");
-		addedAttr.setFont(fieldFont);
-        associatedClass.addAttribute(attribute);
-        update();
+        addAttribute(attribute, -1);
     }
+
+	public void addAttribute(UMLAttribute attribute, int pos) {
+		JLabel addedAttr;
+		this.attributeDict.put(attribute, addedAttr = new JLabel(attribute.toString()));
+		parentPanel.add(addedAttr, "wrap");
+		addedAttr.setFont(fieldFont);
+		if (pos == -1) {
+			associatedClass.addAttribute(attribute);
+		} else
+			associatedClass.addAttribute(attribute, pos);
+		updateFields();
+	}
 
     public void removeAttribute(UMLAttribute attribute) {
         JLabel associatedLabel = attributeDict.get(attribute);
         parentPanel.remove(associatedLabel);
         attributeDict.remove(attribute);
         associatedClass.removeAttribute(attribute);
-        update();
+        updateFields();
     }
 
     public void updateFields() {
@@ -104,11 +110,11 @@ public class UMLClassFrame extends JInternalFrame {
 
         this.attributeDict = new Hashtable<>();
         associatedClass.getAttributes().stream().forEach(x -> {
-            JLabel addedAttr;
-            attributeDict.put(x, addedAttr = new JLabel(x.toString()));
-            addedAttr.setFont(fieldFont);
-            parentPanel.add(addedAttr, "wrap");
-        });
+			JLabel addedAttr;
+			attributeDict.put(x, addedAttr = new JLabel(x.toString()));
+			addedAttr.setFont(fieldFont);
+			parentPanel.add(addedAttr, "wrap");
+		});
         update();
     }
 

@@ -6,6 +6,7 @@ import hig.johanhugg.umldrawing.model.Constants;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 /**
@@ -21,6 +22,7 @@ public class UMLView extends JFrame {
 	private final JMenuItem removeClassItem;
     private final JMenuItem editAttributeItem;
     private final JMenuItem editClassName;
+    private final JMenuItem newUMLClassFromCompiledClass;
     private JMenuBar menubar;
 	private JMenu fileMenu;
 	private JMenu newMenu;
@@ -90,9 +92,14 @@ public class UMLView extends JFrame {
 
 		newUMLClass = new JMenuItem("UML Class");
 		newUMLClass.setActionCommand(Constants.ACTION_COMMAND_NEWUMLCLASS);
-		newUMLClass.setMnemonic(KeyEvent.VK_U);
+		newUMLClass.setMnemonic(KeyEvent.VK_N);
         newUMLClass.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, Event.CTRL_MASK));
 		newMenu.add(newUMLClass);
+
+        newUMLClassFromCompiledClass = new JMenuItem("UML Class from Compiled source");
+        newUMLClassFromCompiledClass.setActionCommand(Constants.ACTION_COMMAND_NEWUMLCLASSFROMCOMPILEDSOURCE);
+        newUMLClassFromCompiledClass.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, Event.CTRL_MASK | Event.SHIFT_MASK));
+        newMenu.add(newUMLClassFromCompiledClass);
 
         undoItem = new JMenuItem("Undo");
         undoItem.setActionCommand(Constants.ACTION_COMMAND_UNDO);
@@ -103,6 +110,7 @@ public class UMLView extends JFrame {
         redoItem.setActionCommand(Constants.ACTION_COMMAND_REDO);
 		redoItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, Event.CTRL_MASK | Event.SHIFT_MASK));
         fileMenu.add(redoItem);
+
 
 		editMenu = new JMenu("Edit");
 		editMenu.setMnemonic(KeyEvent.VK_E);
@@ -175,5 +183,9 @@ public class UMLView extends JFrame {
 
     public JMenuItem getEditClassName() {
         return editClassName;
+    }
+
+    public JMenuItem getNewUMLClassFromCompiledSource() {
+        return newUMLClassFromCompiledClass;
     }
 }

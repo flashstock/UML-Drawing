@@ -16,6 +16,8 @@ public class Constants {
     public static final String ACTION_COMMAND_REMOVECLASS = "Remove Class";
     public static final String ACTION_COMMAND_EDITATTRIBUTE = "Edit Attribute";
     public static final String ACTION_COMMAND_EDITCLASSNAME = "Edit Class Name";
+    public static final String ACTION_COMMAND_NEWUMLCLASSFROMCOMPILEDSOURCE = "New UML Class From Compiled Source";
+
 
     /*
     Association types
@@ -31,7 +33,6 @@ public class Constants {
 	public static final String ATTRIBUTE_CONSTRUCTOR = "Constructor";
 	public static final String ATTRIBUTE_METHOD = "Method";
 	public static final String ATTRIBUTE_FIELD = "Field";
-
 
 
 }

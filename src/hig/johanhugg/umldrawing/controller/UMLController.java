@@ -55,6 +55,7 @@ public class UMLController implements ActionListener {
 		umlView.getRemoveClassItem().addActionListener(actionListener);
         umlView.getEditAttributeItem().addActionListener(actionListener);
         umlView.getEditClassName().addActionListener(actionListener);
+        umlView.getNewUMLClassFromCompiledSource().addActionListener(actionListener);
 	}
 
 	@Override
@@ -82,7 +83,22 @@ public class UMLController implements ActionListener {
             undoRedoStack.undo();
         if (ac.equals(Constants.ACTION_COMMAND_REDO))
             undoRedoStack.redo();
+        if (ac.equals(Constants.ACTION_COMMAND_NEWUMLCLASSFROMCOMPILEDSOURCE))
+            loadClassFromQualifiedName();
 	}
+
+    private void loadClassFromQualifiedName() {
+        String name = JOptionPane.showInputDialog("Enter the fully-qualified name for the class you want to load");
+        if (name == null)
+            return;
+        UMLClassLoader loader = new UMLClassLoader(name);
+        UMLClassFrame frame = new UMLClassFrame(loader.createUMLClassFromLoadedClass());
+        addInternalFrameListeners(frame);
+        umlClassFrames.add(frame);
+
+        Command umlClassCommand = UMLCommandFactory.newUMLClassCommand(umlClassReceiver, frame);
+        undoRedoStack.redo(umlClassCommand);
+    }
 
     private void editClassName(UMLClassFrame selectedFrame) {
         String newName = JOptionPane.showInputDialog("Input the new name for the class");
@@ -281,6 +297,13 @@ public class UMLController implements ActionListener {
         if (classTitle == null || classTitle.isEmpty())
             return;
         UMLClassFrame umlClassFrame = new UMLClassFrame(new UMLClass(classTitle));
+        addInternalFrameListeners(umlClassFrame);
+        umlClassFrames.add(umlClassFrame);
+        Command umlClassCommand = UMLCommandFactory.newUMLClassCommand(umlClassReceiver, umlClassFrame);
+        undoRedoStack.redo(umlClassCommand);
+    }
+
+    private void addInternalFrameListeners(UMLClassFrame umlClassFrame) {
         umlClassFrame.addInternalFrameListener(new InternalFrameAdapter() {
             @Override
             public void internalFrameActivated(InternalFrameEvent e) {
@@ -294,9 +317,6 @@ public class UMLController implements ActionListener {
                 umlView.getEditMenu().setEnabled(false);
             }
         });
-        umlClassFrames.add(umlClassFrame);
-        Command umlClassCommand = UMLCommandFactory.newUMLClassCommand(umlClassReceiver, umlClassFrame);
-        undoRedoStack.redo(umlClassCommand);
     }
 
     private UMLClassFrame getSelectedUMLClassFrame() {

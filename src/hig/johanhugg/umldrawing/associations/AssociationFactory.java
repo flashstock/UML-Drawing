@@ -13,7 +13,7 @@ public class AssociationFactory {
         return new RawAssociation();
     }
 
-    public static List<String> getListOfAssocations() {
+    public static List<String> getListOfAssociations() {
 		List<String> associations = new LinkedList<>();
 
 		associations.add(Constants.ASSOCIATION_RAWASSOCIATION);

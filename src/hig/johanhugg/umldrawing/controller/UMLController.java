@@ -14,9 +14,6 @@ import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -161,7 +158,7 @@ public class UMLController implements ActionListener {
 				"Choose association type",
 				JOptionPane.PLAIN_MESSAGE,
 				null,
-				AssociationFactory.getListOfAssocations().toArray(),
+				AssociationFactory.getListOfAssociations().toArray(),
 				null
 		);
 		Association type = AssociationFactory.createAssociationFromString(selectedAssociationType);

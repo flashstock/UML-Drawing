@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Johan on 2015-03-08.
  */
 public enum Visibility {
-	PRIVATE ("-"), PUBLIC("+"), PROTECTED("#"), DERIVED("#"), PACKAGE("~");
+	PRIVATE ("-"), PUBLIC("+"), PROTECTED("#"), DERIVED("/"), PACKAGE("~"), UNKNOWN("?");
 	private String symbol;
 
 	Visibility(String c) {
@@ -31,6 +31,7 @@ public enum Visibility {
 		tmp.add(Visibility.PROTECTED);
 		tmp.add(Visibility.DERIVED);
 		tmp.add(Visibility.PACKAGE);
+        tmp.add(Visibility.UNKNOWN);
 		return tmp;
 	}
 
@@ -41,6 +42,7 @@ public enum Visibility {
 			return Visibility.PRIVATE;
 		if ((mod & Modifier.PROTECTED) == Modifier.PROTECTED)
 			return Visibility.PROTECTED;
-		return null;
+        System.out.println("Unhandled visibility modifier found: " + Modifier.toString(mod));
+		return Visibility.UNKNOWN;
 	}
 }

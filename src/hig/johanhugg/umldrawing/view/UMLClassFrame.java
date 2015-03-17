@@ -28,7 +28,7 @@ public class UMLClassFrame extends JInternalFrame {
     private Dictionary<UMLAttribute, JLabel> attributeDict;
 
 	public UMLClassFrame(UMLClass associatedClass) {
-		super(null, false, false, false, true);
+		super(null, true, false, false, true);
 		setFrameIcon(null);
         setIconifiable(false);
 		fieldFont = new Font("Monospaced", Font.PLAIN, 12);
@@ -66,6 +66,7 @@ public class UMLClassFrame extends JInternalFrame {
         } catch (PropertyVetoException e) {
             e.printStackTrace();
         }
+        this.pack();
 
     }
 

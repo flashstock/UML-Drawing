@@ -14,6 +14,8 @@ import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -311,6 +313,22 @@ public class UMLController implements ActionListener {
             @Override
             public void internalFrameDeactivated(InternalFrameEvent e) {
                 super.internalFrameDeactivated(e);
+                umlView.getEditMenu().setEnabled(false);
+            }
+
+        });
+        umlClassFrame.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentMoved(ComponentEvent e) {
+                super.componentMoved(e);
+                umlClassFrame.getDesktopPane().repaint();
+                //We need this so that the desktoppane repaints itself every time the component is moved, otherwise lines will look weird.
+                //This also saves performance since we only repaint when the component is moved, not all the time the line is drawn.
+            }
+
+            @Override
+            public void componentHidden(ComponentEvent e) {
+                super.componentHidden(e);
                 umlView.getEditMenu().setEnabled(false);
             }
         });

@@ -31,7 +31,7 @@ public enum Visibility {
 		tmp.add(Visibility.PROTECTED);
 		tmp.add(Visibility.DERIVED);
 		tmp.add(Visibility.PACKAGE);
-        tmp.add(Visibility.UNKNOWN);
+        //tmp.add(Visibility.UNKNOWN);
 		return tmp;
 	}
 

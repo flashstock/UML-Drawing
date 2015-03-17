@@ -47,15 +47,7 @@ public class UMLClassFrame extends JInternalFrame {
 		titleLabel.setFont(titleLabel.getFont().deriveFont(18.0f));
 		parentPanel.add(titleLabel, componentConstraints);
 
-        this.addComponentListener(new ComponentAdapter() {
-			@Override
-			public void componentMoved(ComponentEvent e) {
-				super.componentMoved(e);
-				getDesktopPane().repaint();
-				//We need this so that the desktoppane repaints itself every time the component is moved, otherwise lines will look weird.
-				//This also saves performance since we only repaint when the component is moved, not all the time the line is drawn.
-			}
-		});
+
 
 		if (associatedClass.getAttributes().size() > 0)
 			loadExistingAttributes();

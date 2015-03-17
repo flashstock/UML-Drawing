@@ -20,6 +20,7 @@ public class UMLClassReceiver {
 
 	public void removeUMLClass(JComponent umlClassFrame) {
 		desktopPane.remove(umlClassFrame);
+        umlClassFrame.setVisible(false);
         desktopPane.repaint();
 	}
 }

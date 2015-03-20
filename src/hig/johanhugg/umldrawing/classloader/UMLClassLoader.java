@@ -100,7 +100,7 @@ public class UMLClassLoader {
 
 		return generatedClass;
 	}
-
+    //TEST
 	@Override
 	public String toString() {
 		List<UMLAttribute> allAttributes = new LinkedList<>();

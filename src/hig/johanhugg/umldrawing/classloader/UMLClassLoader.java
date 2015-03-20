@@ -94,9 +94,9 @@ public class UMLClassLoader {
             throw new ClassNotLoadedException();
 		UMLClass generatedClass = new UMLClass(loadedClass.getSimpleName());
 
-        getConstructors().forEach(x -> generatedClass.addAttribute(x));
-		getFields().forEach(x -> generatedClass.addAttribute(x));
-		getMethods().forEach(x -> generatedClass.addAttribute(x));
+        getConstructors().forEach(generatedClass::addAttribute);
+		getFields().forEach(generatedClass::addAttribute);
+		getMethods().forEach(generatedClass::addAttribute);
 
 		return generatedClass;
 	}
